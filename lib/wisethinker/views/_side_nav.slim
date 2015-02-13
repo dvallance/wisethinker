@@ -1,0 +1,12 @@
+span id="side-nav-open" &#9776;
+
+nav id="side-nav" class="inactive"
+  h1 wisethinker.info <span id="side-nav-close">&#10006</span>
+  h2 Latest Postings
+  a href="/listings" Index
+  - documents.each do |doc|
+    a href="/#{doc.type}/#{doc.url_name}"
+      == doc.title
+  a href="/listings" More Posts
+  a href="/crap" 404
+  a href="/error" 500

@@ -1,0 +1,24 @@
+{
+  "type":"book-review",
+  "url_name":"my-fake-book-review",
+  "title": "My Fake Book",
+  "author": "John Smith",
+  "by": "Dave Vallance",
+  "date": "2015-01-01",
+  "update": {
+    "date": "01-05-2015",
+    "body": "Update:"
+
+  },
+  "sections":[
+    {
+      "title":"Content",
+      "body":"First Sentence\n\nSecond Sentence"
+    },
+    {
+      "title":"Target Audience",
+      "body":"First Sentence\n\nSecond Sentence"
+    }
+  ]
+}
+

@@ -1,0 +1,29 @@
+h1 #{titleize(document.type)}
+- case document.type
+- when 'article'
+    p  #{formatted_date(document.date)} by #{document.by}
+- when 'book-review'
+    p  #{formatted_date(document.date)} by #{document.by}
+
+
+article class="#{document.type}"
+  header
+    hr
+    - case document.type
+    - when 'article'
+        h1 #{document.title}
+    - when 'book-review'
+        h1 #{document.title}
+        p Written by <em>#{document.author}</em>
+    hr
+
+  - if document.update
+    section.update
+      h1 Update
+      time datetime="#{document.update.date}"
+        = formatted_date(document.update.date)
+      ==  document.update.rendered_body
+  - document.sections.each do |section|
+    section
+      h1 #{section.title}
+      == section.rendered_body

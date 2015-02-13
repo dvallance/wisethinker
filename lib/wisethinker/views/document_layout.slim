@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    title
+      = document.title
+    link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,700,600,400|Raleway' rel='stylesheet' type='text/css'
+    link href="/stylesheets/base.css" rel="stylesheet"
+    - if document.code_examples
+      link href="/css/prism.css" rel="stylesheet"
+
+  body
+
+    == slim :_side_nav, locals: {documents: documents}
+
+    == yield
+
+  == slim :_disqus, locals: {document: document}
+
+  == slim :_javascript

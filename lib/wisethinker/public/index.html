@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:100,400|Open+Sans:400italic,700italic,700,400' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8" />
+    <link href="/css/base.css" rel="stylesheet" />
+    <link href="/css/prism.css" rel="stylesheet" />
+    <title>
+      Testing
+    </title>
+  </head>
+  <body>
+    <script src="/js/prism.js"></script>
+
+    <img style="opacity:0.1; align:right; float: right; height:100px; width:auto;" src="/images/book.jpg" />
+    <h1>A Book Review</h1>
+    <article class="book-review">
+      <header>
+        <h1>The Docker Book: Containerization is the new
+            virtualization</h1>
+        <p>Written by <i>James Turnbull</i></p>
+        <p>Review by Dave Vallance</p>
+        <p><time datetime='2014-11-20' pubdate>Nov 20, 2014</time></p>
+      </header>
+      <section id="quick-summary">
+        <h1>The Quick and Dirty Summary</h1>
+        <p>
+        There is a lot of good documentation about docker on the official site and
+        through out the web, so this book is <em>NOT</em> a must read, however it
+        does present the information in a nice flow and I found it an enjoyable
+        read. I walked away feeling I had a great overall understanding of Docker itself, and a better focus on how I wanted to start using it!
+        </p>
+      </section>
+      <section>
+        <h1>Introduction</h1>
+      <p>
+       <img src='/images/the-docker-book-containerization-is-the-new-virtualization' />
+        I didn't know much about Docker, other then the basic idea of what it
+        tries to accomplish. That being the ability to build an application,
+        possibly of high complexity and with lots of moving parts, and then package it up
+        in a standardized container (akin to a shipping container). Once in a
+        shipping container it therefore should be extreamly easy (in therory) to
+        move this tested and working application around without worrying about any
+        inconsistentcies amoungst the different running environments. Whether on
+        another developers laptop, in a QA environment, or out to production
+        servers; you application should function consistently.
+      </p>
+      <p>
+This concept of building an application and then shipping it off, knowing it will "just work", is what got me excited about Docker and brought me to read this book.
+      </p>
+      </section>
+      <section>
+        <h1>How does it read? What does it cover?</h1>
+        <p>
+  I found the book reads very well. Theres your standard into information, such as who the book is written for, acknoledgments, and blurbs on numerous individuals that helped develop it.
+  Then after giving some quick info on what container virtualization is and how its different then hypervisor virtualization, the book gets into Docker itself.
+        </p>
+      </section>
+      <p>
+It gives some good detail on what Docker is, what it does, and how you can make use of it. At this point, if your like me, you'll be jazzed up to start trying it out and the book flows nicely right into installation. It lets you know the requirements requirements and gives step by step examples of installation on 4 different systems Ubuntu, Red Hat, OS X and Microsot Windows.
+      </p>
+      <p>
+I always go to the source(https://docs.docker.com/installation/#installation) to make sure I have the most recent installation information (An this book was spot on for an Ubuntu install).
+      </p>
+      <p>
+See my installation notes if your on Archlinux or Ubuntu (There are some snags I encountered).
+I had an issue installing on Ubuntu 14.04 see [My Installation Notes].
+
+Now that you are up and running its basically following along learning the following:
+      </p>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <pre><code class="language-ruby">class Test
+  #This is an example
+  def initialize()
+    puts 'hello'
+  end
+end</code></pre>
+    </article>
+      <section>
+        <h1>Related</h1>
+        <ul>
+          <li>Code Walkthrough: Playing with docker</li>
+        </ul>
+        <p>Applying knowledge from this book I begin to explore docker, putting
+        it to the test and creating. See how I walk through building docker containers that run thin
+        applications.</p>
+      </section>
+  </body>
+
+</html>

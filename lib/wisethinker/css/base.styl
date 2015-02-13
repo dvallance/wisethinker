@@ -1,0 +1,271 @@
+nav-border-color = #333
+light-grey-color = #999
+
+*
+  padding 0
+  margin 0
+  border 0
+
+p, ol, ul
+  margin-top 1rem
+  line-height 1.5rem
+
+a
+  font-style normal
+  font-weight 400
+  text-decoration none
+
+
+li
+  margin-top .5rem
+  line-height 1.5rem
+  padding-left 1rem
+  font-style normal
+  font-size 1rem
+
+ul, ol
+  list-style-position inside
+
+html
+  font-size 20px
+
+#side-nav-close
+  float right
+
+  &:hover
+    cursor pointer
+    transform scale(.9,.9)
+
+#side-nav-open
+  font-size 2rem
+  transition display 2s
+  float left
+  &:hover
+    cursor pointer
+    transform scale(.9,.9)
+
+hr
+  color grey
+  height 2px
+  width 100%
+  background-color lightgrey
+
+body
+  position static
+  transition margin-left .5s
+
+  @media screen and (max-width: 1200px)
+    margin-left 10px
+    margin-right 10px
+    #side-nav-open
+      visibility visible
+    #side-nav-close
+      visibility visible
+  @media screen and (min-width: 1200px)
+    margin-left 450px
+    margin-right auto
+    #side-nav-open
+      visibility hidden
+    #side-nav-close
+      visibility hidden
+
+  padding-top 10px
+  padding-left 50px
+  padding-right 50px
+  padding-bottom 2rem
+  font-family 'Open Sans', sans-serif
+  font-style normal
+  font-weight 400
+  //background linear-gradient(to right, #DDD 5%, #EEE 60%, #CCC 95%)
+  font-size 1rem
+  max-width 800px
+
+  nav
+    transition left 0.5s
+    top 0
+    float left
+    position absolute
+    //height 100%
+    width 400px
+    background-color rgba(0,0,0,0.85)
+    color lightgrey
+    box-shadow 10px 10px 10px #444
+    z-index 1000
+
+    @media screen and (max-width: 1200px)
+      &.active
+        left 0
+
+      &.inactive
+        left -450px
+
+    @media screen and (min-width: 1200px)
+      &.active
+        left 0
+
+      &.inactive
+        left 0
+
+    h1
+      background-color black
+      text-align left
+      padding 10px
+      line-height 2rem
+      font-family 'Raleway', sans-serif
+      font-size 2rem
+      font-weight 400
+      border-bottom solid nav-border-color 1px
+      color lightblue
+
+    h2
+      font-size 1.2rem
+      //background-color rgba(0,0,0,0.4)
+      background-color black
+      padding 10px
+      border-bottom solid nav-border-color 1px
+      font-family 'Raleway', sans-serif
+      font-weight 400
+      color lightyellow
+
+    h2 ~ a
+      padding-left 20px
+      font-style normal
+      font-weight 400
+
+    /*
+      &::before
+        content "\A"
+        width 0
+        height 0
+        font-size 0
+        line-height 0
+        border-top 5px solid transparent
+        border-left 5px solid white
+        border-bottom 5px solid transparent
+        margin 10px
+        vertical-align middle
+    */
+
+    a:link, a:active, a:visited
+      color white
+
+    a
+      display block
+      padding 10px
+      border-bottom solid nav-border-color 1px
+      color white
+      //text-decoration none
+
+    a:hover
+      background-color black
+      margin-left 2px
+
+  > h1
+    text-align center
+    color light-grey-color
+    line-height 2rem
+    text-transform uppercase
+    font-variant small-caps
+    font-family 'Raleway', sans-serif
+    font-size 2rem
+    word-spacing 0.5rem
+    font-weight 400
+    letter-spacing .5rem
+
+  > p
+    margin-top .5rem
+    text-align center
+    color light-grey-color
+
+  nav ~ img
+    opacity 0.5
+    align right
+    float right
+    height 100px
+    width auto
+
+  article
+    margin-top 2rem
+    line-height 1rem
+    margin-bottom 4rem
+
+    a::before
+      content: ' [ '
+
+    a::after
+      content: ' ] '
+
+    a:link, a:active, a:visited
+      color grey
+
+    a:hover
+      color darkgrey
+
+    em
+      margin-left 5px
+      margin-right 5px
+      font-style italic
+      font-weight normal
+
+    header
+      h1
+        line-height 1.4rem
+        font-size 1.4rem
+        margin-top 1rem
+        margin-bottom 1rem
+
+      p
+        margin-top .5rem
+        margin-bottom 1rem
+
+    section
+      margin-top 2rem
+
+      &.update
+        background-color lightyellow
+        border grey solid 2px
+        border-radius 10px
+        padding 1rem
+        padding-top .5rem
+        box-shadow 10px 10px 10px #444
+        margin-left -20px
+        margin-right -20px
+
+    h1
+      line-height 1.5rem
+      text-align left
+      font-size 1.2rem
+      font-weight 700
+      font-style normal
+      margin-bottom 1rem
+
+  div#not-found
+    margin-left auto
+    margin-right auto
+    margin-top 4rem
+    text-align center
+
+    h1
+      font-size 4rem
+      line-height 4rem
+      color light-grey-color
+      font-variant small-caps
+      font-family 'Raleway', sans-serif
+
+      span
+        margin-left 1rem
+        color teal
+        display inline-block
+        transform rotate(90deg)
+
+    h2
+      margin-top 4rem
+      font-size 3rem
+      line-height 3rem
+      letter-spacing .2rem
+
+    p
+      margin-top 2rem
+
+
+

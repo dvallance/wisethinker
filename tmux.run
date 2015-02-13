@@ -1,0 +1,36 @@
+#!/bin/bash
+SESSION='wisethinker'
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+echo 'here'
+echo $SESSION
+
+tmux has-session -t $SESSION
+if [ $? -eq 1 ]; then
+
+  echo "INSIDE"
+
+  tmux new-session -c $DIR -s $SESSION -n vim -d
+  tmux send-keys 'vim .' C-m
+
+  tmux new-window -n cmds
+  tmux split-window -v -p 50
+  tmux split-window -v -p 50
+  tmux select-pane -t 2
+  tmux send-keys 'cd lib/wisethinker && stylus css --watch --out public/stylesheets' C-m
+  tmux select-pane -t 1
+  tmux send-keys 'bundle exec shotgun' C-m
+  tmux select-pane -t 0
+  tmux send-keys 'bundle exec guard' C-m
+
+  tmux new-window -n irb
+  tmux send-keys 'bundle exec irb' C-m
+
+  tmux new-window -n bash
+
+  tmux select-window -t vim
+fi
+
+TERM=xterm-256color tmux attach -t $SESSION
+
+

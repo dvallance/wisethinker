@@ -1,0 +1,20 @@
+h1 Listings/Index
+
+article class="listing"
+  header
+    hr
+
+  - documents.each do |document|
+    section
+      h1
+        = formatted_date(document.date)
+      p
+        = document.date
+      p
+        = titleize(document.type)
+      p
+        = document.title
+      p
+        a href="/#{document.type}/#{document.url_name}" View
+
+    hr

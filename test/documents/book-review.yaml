@@ -1,0 +1,21 @@
+---
+type: book-review
+url_name: my-fake-book-review
+title: My Fake Book
+author: John Smith
+by: David Vallance
+date: '2015-01-01'
+sections:
+  - title: Content
+    body: |
+      First Sentence
+      Second Sentence
+
+      * hello
+      * hello
+
+  - title: Target Audience
+    body: |
+      First Sentence
+
+      Second Sentence

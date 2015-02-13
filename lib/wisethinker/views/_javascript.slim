@@ -1,0 +1,13 @@
+javascript:
+  var side_nav = document.getElementById("side-nav");
+  var side_nav_open = document.getElementById("side-nav-open");
+  var side_nav_close = document.getElementById("side-nav-close");
+  side_nav_open.onclick = function() {
+    side_nav.classList.remove("inactive");
+    side_nav.classList.add("active");
+  };
+  var side_nav_close = document.getElementById("side-nav-close");
+  side_nav_close.onclick = function() {
+    side_nav.classList.remove("active");
+    side_nav.classList.add("inactive");
+  };
