@@ -275,3 +275,22 @@ body div#not-found h2 {
 body div#not-found p {
   margin-top: 2rem;
 }
+body article.listing section hr {
+  padding-top: 1rem;
+}
+body article.listing section p:nth-child(1) {
+  float: right;
+  color: #999;
+}
+body article.listing section p:nth-child(2) {
+  color: #999;
+  float: left;
+}
+body article.listing section p:nth-child(3) {
+  padding-top: 1rem;
+  clear: both;
+  font-weight: bold;
+}
+body article.listing section p:nth-child(5) {
+  padding-bottom: 1rem;
+}
