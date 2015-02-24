@@ -15,7 +15,6 @@ a
   font-weight 400
   text-decoration none
 
-
 li
   margin-top .5rem
   line-height 1.5rem
@@ -190,16 +189,16 @@ body
     margin-bottom 4rem
 
     a::before
-      content: ' [ '
+      content: ' ( '
 
     a::after
-      content: ' ] '
+      content: ' ) '
 
     a:link, a:active, a:visited
-      color grey
+      color #008080
 
     a:hover
-      color darkgrey
+      color #004040
 
     em
       margin-left 5px
@@ -230,6 +229,11 @@ body
         box-shadow 10px 10px 10px #444
         margin-left -20px
         margin-right -20px
+
+        & p:nth-child(1)
+          font-weight bold
+          font-style italic
+          color light-grey-color
 
     h1
       line-height 1.5rem

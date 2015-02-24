@@ -197,18 +197,18 @@ body article {
   margin-bottom: 4rem;
 }
 body article a::before {
-  content: ' [ ';
+  content: ' ( ';
 }
 body article a::after {
-  content: ' ] ';
+  content: ' ) ';
 }
 body article a:link,
 body article a:active,
 body article a:visited {
-  color: #808080;
+  color: #008080;
 }
 body article a:hover {
-  color: #a9a9a9;
+  color: #004040;
 }
 body article em {
   margin-left: 5px;
@@ -238,6 +238,11 @@ body article section.update {
   box-shadow: 10px 10px 10px #444;
   margin-left: -20px;
   margin-right: -20px;
+}
+body article section.update p:nth-child(1) {
+  font-weight: bold;
+  font-style: italic;
+  color: #999;
 }
 body article h1 {
   line-height: 1.5rem;

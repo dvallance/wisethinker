@@ -19,9 +19,7 @@ article class="#{document.type}"
 
   - if document.update
     section.update
-      h1 Update
-      time datetime="#{document.update.date}"
-        = formatted_date(document.update.date)
+      p Updated: #{formatted_date(document.update.date)}
       ==  document.update.rendered_body
   - document.sections.each do |section|
     section
