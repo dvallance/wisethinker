@@ -9,7 +9,7 @@ gem 'sinatra-contrib'
 gem 'slim'
 gem 'tilt'
 gem 'redcarpet'
-gem 'RedCloth'
+#gem 'RedCloth'
 gem 'rdiscount'
 gem 'github-markup'
 
