@@ -12,7 +12,7 @@ gem 'RedCloth'
 gem 'rdiscount'
 gem 'github-markup'
 
-gem 'json_object', path: '/home/david/projects/json_object'
+gem 'json_object', git: 'https://github.com/dvallance/json_object.git'
 
 #mongo
 gem 'mongo'
