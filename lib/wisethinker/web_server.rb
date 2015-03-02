@@ -35,10 +35,6 @@ module Wisethinker
       slim :document, layout: :document_layout, locals: {document: document, documents: documents}
     end
 
-    get '/error' do
-      raise 'problem'
-    end
-
     not_found do
       status 404
       slim :"404"
