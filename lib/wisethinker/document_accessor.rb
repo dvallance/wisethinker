@@ -10,7 +10,6 @@ module Wisethinker
 
     def document(url_name: , type:)
       json = storage_accessor.find_by_type_and_url_name(type, url_name)
-      puts "JSON: #{json}"
       json.nil? ? nil : Document.load(json)
     end
 
