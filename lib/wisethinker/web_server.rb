@@ -2,11 +2,13 @@ require 'sinatra/base'
 require "slim"
 require 'wisethinker/config/config.rb'
 require_relative 'helpers.rb'
-
-#White list document types that are [view|search]able
-ACCEPTABLE_LISTING_TYPES = ['book-review', 'article']
+require 'active_support/core_ext/string/inflections'
 
 module Wisethinker
+
+  #White list document types that are [view|search]able
+  ACCEPTABLE_LISTING_TYPES = ['news', 'book-review', 'article']
+
   class WebServer < ::Sinatra::Base
 
     set :static, true
@@ -19,13 +21,13 @@ module Wisethinker
 
     get '/listings/?' do
       documents = settings.docs.listing(ACCEPTABLE_LISTING_TYPES)
-      slim :listing, layout: :layout_listing, locals: {documents: documents}
+      slim :listing, layout: :layout_listing, locals: {documents: documents, listing_type: 'All'}
     end
 
     get '/listings/:type' do
       halt(404) unless ACCEPTABLE_LISTING_TYPES.include?(params[:type])
       documents = settings.docs.listing(params[:type])
-      slim :listing, layout: :layout_listing, locals: {documents: documents}
+      slim :listing, layout: :layout_listing, locals: {documents: documents, listing_type: params[:type]}
     end
 
     get '/:type/:url_name' do

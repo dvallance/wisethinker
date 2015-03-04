@@ -2,11 +2,19 @@ span id="side-nav-open" &#9776;
 
 nav id="side-nav" class="inactive"
   h1 wisethinker.info <span id="side-nav-close">&#10006</span>
+  h2 Information
+  a href="" About Me
+  a href="" About this Site
+  h2 Listings
+  a href="/listings" All
+  - Wisethinker::ACCEPTABLE_LISTING_TYPES.sort.each do |type|
+    a href="/listings/#{type}" #{titleize(type).pluralize}
   h2 Latest Postings
-  a href="/listings" Index
-  - documents.each do |doc|
+  - documents.take(5).each do |doc|
     a href="/#{doc.type}/#{doc.url_name}"
       == doc.title
-  a href="/listings" More Posts
-  a href="/crap" 404
-  a href="/error" 500
+  h2 Projects
+  a href="" JsonObject
+  h2 External Links
+  a href="https://github.com/dvallance" GitHub Profile
+  a href="https://rubygems.org/profiles/DavidVallance" RubyGems Profile

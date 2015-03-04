@@ -1,4 +1,4 @@
-h1 Listings/Index
+h1 Listing (#{listing_type == 'All' ? listing_type : titleize(listing_type).pluralize})
 
 article class="listing"
   hr
@@ -9,9 +9,10 @@ article class="listing"
       p #{document.title}
       - case document.type
       - when 'book-review'
-        p #{document.sections.last.title}: #{document.sections.last.body}
-      - when 'article'
-        p #{document.sections.first.title}: #{document.sections.first.body}
+        p #{document.sections.last.title}
+        == document.sections.last.rendered_body
+      - else
+        == document.sections.first.rendered_body
       p
         a href="/#{document.type}/#{document.url_name}" read full post
 

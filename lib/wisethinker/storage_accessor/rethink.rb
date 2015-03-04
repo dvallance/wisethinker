@@ -28,7 +28,7 @@ module Wisethinker
           type = Array(type)
           table.filter{|record|
             record["type"].match("(#{type.join("|")})")
-          }.run(conn).to_a
+          }.order_by(@rql.desc(:date)).run(conn).to_a
         end
       end
 

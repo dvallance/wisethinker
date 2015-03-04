@@ -296,6 +296,6 @@ body article.listing section p:nth-child(3) {
   clear: both;
   font-weight: bold;
 }
-body article.listing section p:nth-child(5) {
+body article.listing section p:last-of-type {
   padding-bottom: 1rem;
 }

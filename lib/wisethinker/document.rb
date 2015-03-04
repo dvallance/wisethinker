@@ -8,6 +8,8 @@ module Wisethinker
         Article.new(json)
       when 'book-review'
         BookReview.new(json)
+      when 'news'
+        News.new(json)
       end
     end
 
@@ -52,4 +54,6 @@ module Wisethinker
     json_value_accessors :author
   end
 
+  class News < Article
+  end
 end

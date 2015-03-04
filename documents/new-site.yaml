@@ -1,0 +1,32 @@
+---
+type: news
+url_name: new-site
+title: "Launching this Site!"
+date: '2015-03-09'
+
+sections:
+  - title:
+    body: |
+
+      Four months ago I left a job in San Francisco, working for [Yammer/Microsoft](https://about.yammer.com/). It was an absolutely amazing experience and I may have been a little crazy to leave, but I did.
+
+      My girlfriend and I decided to move to Vancouver BC, and I also decided to take this <i>free time</i> to get acquainted with some new technologies, refresh my knowledge of some older ones, read a lot, and work on personal projects; this site being one of them.
+
+  - title: Plans for this Site
+    body: |
+      I have a terrible memory and generally make lots of notes on the things I work with, so I figure I might as well share them. My hope is that they might prove useful to others in addition to being a future reference for myself *;)*
+
+      I work in IT so this site's content will be predominately *Information Technology* related. I've worn a lot of hats in that area but currently I'm focused on Ruby development and supporting technologies/infrastructure.
+
+      The plan is to write articles, coding examples, how-to's, references and even some book reviews.
+
+  - title: Whats running this Site?
+    body: |
+      I was previously using a static site generator for my website, specifically Jeykll. I have some older articles on that subject [Getting Started With Jeykll](/getting-started-with-jeykll) and [Default Naming Conventions of Posts in Jeykll](/jeykll-how-post-naming-works). It worked well but since static sites are kinda limiting, and I had the extra time, I quickly built my own dynamic site.
+
+      For details on how this site is built and served checkout [About Site](/reference/about-site)
+
+
+
+
+

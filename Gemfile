@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in wisethinker.gemspec
 gemspec
 
+gem 'activesupport'
 gem 'thin'
 gem 'sinatra'
 gem 'sinatra-contrib'

@@ -1,8 +1,8 @@
 h1 #{titleize(document.type)}
 - case document.type
-- when 'article'
-    p  #{formatted_date(document.date)} by #{document.by}
 - when 'book-review'
+    p  #{formatted_date(document.date)} by #{document.by}
+- else
     p  #{formatted_date(document.date)} by #{document.by}
 
 
@@ -10,11 +10,11 @@ article class="#{document.type}"
   header
     hr
     - case document.type
-    - when 'article'
-        h1 #{document.title}
     - when 'book-review'
         h1 #{document.title}
         p Written by <em>#{document.author}</em>
+    - else
+        h1 #{document.title}
     hr
 
   - if document.update
