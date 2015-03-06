@@ -11,8 +11,8 @@ gem 'slim'
 gem 'tilt'
 gem 'redcarpet'
 #gem 'RedCloth'
-gem 'rdiscount'
-gem 'github-markup'
+#gem 'rdiscount'
+#gem 'github-markup'
 
 gem 'json_object', git: 'https://github.com/dvallance/json_object.git'
 

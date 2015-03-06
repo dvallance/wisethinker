@@ -7,7 +7,7 @@ html
     link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,700,600,400|Raleway' rel='stylesheet' type='text/css'
     link href="/stylesheets/base.css" rel="stylesheet"
     - if document.code_examples
-      link href="/css/prism.css" rel="stylesheet"
+      link href="/css/prism-okaidia-bash-ruby.css" rel="stylesheet"
 
   body
 
@@ -18,3 +18,6 @@ html
   == slim :_disqus, locals: {document: document}
 
   == slim :_javascript
+
+  -if document.code_examples
+    script src='/js/prism-okaidia-bash-ruby.js'

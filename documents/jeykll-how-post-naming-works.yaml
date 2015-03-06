@@ -1,0 +1,74 @@
+---
+type: article
+url_name: jeykll-how-post-naming-works
+title: Default Naming Conventions of Posts in Jeykll
+date: '2012-03-06'
+code_examples: true
+
+sections:
+  - title:
+    body: |
+
+      **Note:** _as I’m testing different behaviours, changing config settings, etc; I seem to end up in a state where things stop working properly. When this happens, the output from Jeykll doesn’t seem to help me identify what I changed to cause a problem or exactly what the issue is. I strongly suggest you use a source control system, such as git, to be able to revert to a previous working state._
+
+      As I stated in my first post on Jeykll, I want to understand the naming conventions of posts and figure out how to change them.
+
+  - title: Default Behaviour
+    body: |
+      It appears that your posts must be named in the following format or they will not function properly.
+
+      <pre>
+      <code class="language-bash">year-month-day-title.format (e.g. 2012-01-05-my-opinion-on-somthing.textile)</code>
+      </pre>
+
+      I really didn’t want the date in the filename itself, but since you can override it in the YAML Front Matter I guess its not that big of a deal (still I dislike it, as the day I actually publish a post is usually not the day I start writing it).
+
+  - title: Permalinks
+    body: |
+      Permalink is the terminology Jeykll uses for how your site’s URLs are generated.
+
+      There are a few built-in styles to choose from (i.e date, pretty or none) but its very flexible and you can supply your own. I chose to go with /blog/:categories/:title for my posts.
+
+      So in my _config.yml file I added:
+
+      <pre>
+      <code class="language-bash">permalink: /blog/:categories/:title</code>
+      </pre>
+
+      The part that is confusing is that the :title is replaced by the title part of the filename and doesn’t seem to take the :title value from the YAML Front Matter section. Which I hoped it would. So in other words the :title part of the url is directly tied to the filename and can’t be changed, unless you change the filename itself.
+
+      So...
+
+      <pre>
+      <code class="language-bash">_posts/2012-03-05-my-cool-article.textile</code>
+      </pre>
+
+      with my permalink setting of...
+
+      <pre>
+      <code class="language-bash">permalink: /blog/:categories/:title</code>
+      </pre>
+
+      and a YAML Front Matter of...
+
+      <pre>
+      <code class="language-bash">---
+      title: New Title Name
+      categories: [ amazing, technology ]
+      ---</code>
+      </pre>
+
+      produces a final url for that post of...
+
+      <pre class="language-bash">
+      <code class="language-bash">/blog/amazing/technology/my-cool-article/</code>
+      </pre>
+
+  - title: 'What Does Setting the :title Do Then?'
+    body: |
+      It comes into play when you want to use Template Data. When you access the post’s title via markup, such as {{ post.title }} it will have the “New Title Name” as declared above.
+
+
+  - title: Continuing
+    body: |
+      I’m still learning the finer ins and outs of Jeykll so look out for future blogs. Tags and how to use them are still a mystery; that may be my next topic.
