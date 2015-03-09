@@ -1,0 +1,44 @@
+---
+type: book-review
+url_name: service-oriented-design-with-ruby-and-rails
+title: Service Oriented Design with Ruby and Rails
+author: Paul Dix
+date: '2015-01-05'
+
+sections:
+  - title: Content
+    body: |
+      The core concept is designing an application's architecture around multiple RESTful HTTP services, and focuses on implementation using the Ruby language. Note: while Rails is specifically mentioned, in the title, Rack and Sinatra are also represented.
+
+  - title: Target Audience
+    body: |
+
+  - title: Content / Completeness
+    body: |
+      This book is primarily for Ruby developers who are looking for guidance on implementing service oriented architectures. There is fair amount of information that is just generally useful, ll, and can be applied with any language, all the books code is specifically in Ruby.
+
+  - title:
+    body: |
+      After answering "What's a Service?" and describing the tools that will be used, the first chapter quickly gets into building an actual service. Written for Sinatra and making use of ActiveRecord, JSON, Typhoeus and tested with Rspec; the service is also accompanied with a client library for easy consumption. The approach of the chapter sets the tone for most of the book, which is showing lots of coded examples with plenty of explanatory notes.
+
+      The strong use of code examples and use cases make this a great book for actually getting started with service oriented design, but it doesn't skimp out on other information as well. I particularly like how it talked about "Making a Case for Service Oriented Design",  which gets into detailing Isolation, Robustness, Agility, Interoperability and Reuse as good reasons for its use. Also chapter 4 discusses strategies for designing services and amongst other things talks about partitioning strategies (in this context, partitioning means splitting up functionality). I found it very useful!
+
+      The book itself, describes all the primary topics that it covers, which are:
+
+      * REST, HTTP verbs, and response codes
+      * API Design
+      * Building Services in Ruby
+      * Connecting to services
+      * Consuming JSON and XML based services
+      * Architecture design
+      * Messages and AMQP
+
+      While the information isn't exhaustive for each topic, the core of the book feels quite complete. All the important information regarding service oriented design is present, and along with that information there is a ton of useful code examples.
+
+  - title: Clarity and Readability
+    body: |
+      This book is heavy with code examples, so the readers ability to understand these examples will certainly be a factor in their enjoyment of it. I would think anyone "comfortable" with Ruby should be OK. As for the code examples themselves they are well written, as well as the accompanying explanations.
+
+  - title: Summary
+    body: |
+      I originally read this book back in December 2012 and I loved it! Having been forced to work with a couple large monolithic rails applications I was already starting to think about how to break them up. This got me initially toying with some service oriented design concepts and as I questioned my attempts I sought out a book on the subject. This book became a great reference and helped me a lot. I definitely think this is a MUST read.

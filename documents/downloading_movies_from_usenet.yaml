@@ -1,0 +1,111 @@
+---
+type: article
+url_name: downloading-movies-from-usenet
+title: Downloading Movies from Usenet
+date: '2014-12-19'
+code_examples: true
+
+sections:
+  - title:
+    body: |
+      With the recent crackdown on sites like PirateBay, it has become harder to find torrents with enough seeders for achieving decent download speeds.
+
+      Looks like its a good time to revisit an older technology, Usenet!
+
+  - title: Can you get illegal movies from Usenet?
+    body: |
+      In short. Yes.
+
+      Checkout Wikipedia for information on [Usenet](http://en.wikipedia.org/wiki/Usenet).
+
+      *"While binary newsgroups can be used to distribute completely legal user-created works, open-source software, and public domain material, some binary groups are used to illegally distribute commercial software, copyrighted media, and obscene material."*
+
+      ...you should do some research into the potential consequences, for your country, if you choose to download illegal material.
+
+  - title: If its illegal why share information on how to download from Usenet?
+    body: |
+      Usenet isn't all about illegal content, but lets assume for a minute that it will be used for that purpose.
+
+      There is no definitive line for what is *"right"* or *"wrong"* and people should ultimately use there own moral judgement on the matter. I encourage everyone to due there own research on piracy laws. It is a hot topic with lots of varying opinions and perspectives.
+
+  - title: Usenet vs Torrents, Whats the difference?
+    body: |
+
+      ##Entry Level
+
+      Torrents have a lower entry level. You basically have to choose and install a torrent client application. Then visit a torrent listing website and click a download button. Finding a torrent site is fairly quick as they are free and quickly accessed for the value they bring to the table.Choosing a torrent client possibly requires trying out a few to see which one you like the best or simply doing a web search and seeing what seems to be the most popular for your operating system, but it two is relatively simple.
+
+    Usenet also requires decisions to be made and they are a lot more difficult and time consuming. I'll describe this in more detail below but in short the decisions are: choose a service provider, find a good Usenet indexer, install a Usenet client application and also configure that client.
+
+      ##Cost
+
+      There are no generally no costs associated with using Torrents, but with Usenet you will most likely be paying for access to a provider (There are free providers but I hear the download speeds are terrible and I have nerver bothered to investigate them, probably not worth your time).
+
+      ##Content Availability and Download Speed
+
+      With torrents users are essentially downloading content from one another. Someone has to be sharing the content, know as seeding, for you to be able to download it. That seeder also can decide how fast he will allow you do download from him, which is often very low. It is only when lots of people are seeding the same content that all there "low" speeds accumulate into a fast download speed for you. So the popularity of the content and the age of the content greatly effects the availability and download speed. Torrents tend to be good for new popular movies for example, but are generally bad for older and less popular movies.
+
+      Usenet on the other hand doesn't rely on "seeders". There is a network of servers that contain the content and you pay a provider for access to download from a server. Download speeds will vary depending on your provider but they are generally "crazy fast". So speed is constent and the only question is availability. Usenet providers have whats called a retention period, meaning anything uploaded by users withing that retention period is availabel. Most providers have retention periods upwards of 5 years, so you can imagine how much content there is on them.
+
+  - title: I Want to Try Usenet. What are the steps?
+    body: |
+      1. Sign up for a Usenet service
+      2. Sign up for a Usenet Indexer
+      3. Install and Configure Client Software
+
+  - title: Sign up for a Usenet Service
+    body: |
+      Do not sweat this decission that much. There are a lot of great providers and you can't really go wrong if you stick with any of the popular ones. They should all have the same content selection as Usenet servers download available content from each other, and most have high retention levels and fast download speeds. I would simply look for one that feels right to you. (e.g. they have a website that you can navigate, there plans are straigtforward, they have good documentation, and there payment method is easy/accessable).
+
+      Check out this [article](http://lifehacker.com/five-best-usenet-providers-1611239789) for some Usenet service providers.
+
+      Currently I'm trying out [NewsDemon](http://www.newsdemon.com/) as I liked the optional non-expiring block plans. You pay for a set amount of download capacity instead of a monthly plan. Unlike monthly plans you are not automatically billed and you simply purchase more capacity when you haved used up your alloted amount. You can buy 10 Gigabytes for $2 if you want to pay as little as possibly to try out a usenet service.
+
+      I have also used [NewsHosting](https://www.newshosting.com/) in the past and was really happy with them, but currently my downloading demands are low enough that the block plans work out to be more advantagous to my wallet ;)
+
+      If you want unlimited downloads excpect to pay around $10-20 dollars a month, and lower prices can be found as there are plans with decreasing montly download limits (as an example NewsDemon as a 50 Gigabytes monthly limit at $5).
+
+      ##What are SSL Connections? Do I need that?
+
+      Once you look at a few providers you will inevitably see some plans that offer SSL Connections. In a nut shell this simply is a encryption technology that makes sure no one between you and the Usenet server can tell what you are downloading/uploading. Theres no real downside to using it so if it comes with your plan, use it!
+
+      I personally don't bother as it would cost me more and I trust my internet service provider.
+
+      There is a term called [Traffic Shapping](http://en.wikipedia.org/wiki/Traffic_shaping) where an internet service provider could technically target and specifically limit Usenet traffic; SSL connections would circumvent this from happening. While I'm aware of this I've never experienced it or heard of it effecting anyone I know.
+
+      There is a [web based test](http://broadband.mpi-sws.org/transparency/glasnost.php) to see if your internet service provider is performing traffic shapping (I had issues running it on my system but you might have better luck).
+
+  - title: Sign up for a Usenet Indexer
+    body: |
+      Just like Google lets you find stuff on the web an indexing site will allow you to search for content on Usenet.
+
+      The indexing site will have a method to search for content, like a movie for example. If a result is found it will provide a NZB file download that will allow your Usenet client to actually download the requested content from your provider (we'll get into this more later on).
+
+      Much like Piratebay's issues with legal action, Usenet indexers have also been targeted by the Motion Picture Association (MPAA). NewzBin was an amazing Usenet indexing site but closed on November 28, 2012. This was the indexer I used years ago and I was sad to see that it no longer existed. For alternatives you'll have to try out some and see what you like.
+
+      SABnzbd has a [list of options](http://wiki.sabnzbd.org/nzb-sources)
+      also see [Best NZB Site List](http://usenetreviewz.com/nzb-sites/)
+
+      ##Pain Point
+
+      Finding a good indexer is time consuming, enough so that I didn't checkout many and settled on using OZnzb for its simple search and its 5 free NZB downloads a day. I was actually interested in upgrading to see if its VIP features are decent but the way it wants you to carry out the *"payment process"* makes me a little dubious.
+
+      Anyway I bet its this process of choosing a indexer that will possibly cause many to not bother with Usenet at all. It was so amazing back in the day with NewzBin around, but alas we are where we are.
+
+      ...so almost all indexers require the user to register, which is sometimes open to the public or by invite only, some have limited free features and most have paid upgrades, they can focus on different types of content and will probably have wildly varying functionality; in short you'll probably have to do some heavy investigation to find one that you'll like.
+
+      ##Is it Worth It?
+
+      With services like Hulo, Netflix and Amazon Prime at low rates, and providing lots of content, it is highly questionable. Also even thought torrents took a blow lately, what with PirateBay's troubles, I'm sure they aren't going anywhere soon!
+
+  - title: Install and Configure Client Software
+    body: |
+
+      I mentioned NZB files when talking about Usenet indexers. An NZB file is basically a set of instructions with which the client software is designed to follow and download the actual content. In reality a movie for example isn't stored on Usenet as 1 file but actually many smaller files that all need to be downloaded. Its generally a compressed file that is split into many parts, so the client also has to join and uncompress the final file. Thankfully NZB files and the client software handles all this for you and abstracts away the complexity.
+
+      There are two main chooses for the client software [SABnzbd](http://sabnzbd.org/) or [NZBGet](http://nzbget.net/). I believe either works in  Windows, Mac, or Linux. You honestly can't go wrong with either. If you read through comparisons you might find varying levels of performance and download speeds but for the most part they will be negligible. Just visit both web sites and go with whichever one seems easier to navigate, etc.
+
+      ##Configure
+
+      Your Usenet provider will supply you with a server address, username, and password. You will have to configure your client to use these to be able to download. Just check the documentation for which ever client you download; both are fairly straight forward to configure.
+

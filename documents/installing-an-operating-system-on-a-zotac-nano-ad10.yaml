@@ -1,0 +1,84 @@
+---
+type: article
+url_name: installing-an-operating-system-on-a-zotac-nano-ad10
+title: Installing An Operating System On A Zotac Nano Ad10
+by: David Vallance
+date: '2012-02-26'
+update:
+  date: '2015-01-01'
+  body: |
+    Over the last year I have had no issue running two different flavours of linux on the zotac.
+
+    [Manjaro Openbox addition](https://manjaro.github.io/) and [Ununtu GNOME](http://ubuntugnome.org/)
+
+    *For Manjaro you will have to add radeon.audio=1 to your kernel parameters, to hear any HDMI audio. [see here](https://wiki.archlinux.org/index.php/ATI)*
+
+
+
+
+sections:
+  - title:
+    body: |
+      I ended up buying a Zotac Nano to serve as my media server. Being a ‘do it yourselfer’ I was going to build my own little machine but after doing some shopping around I realized a prebuilt machine from Zotac offered significant cost savings. Also I wouldn’t have to worry about compatibility issues so cheaper, safer and easier seemed a no-brainer.
+
+      …although I do love building machines from scratch, I just wanted something up fast. I had a new TV in my room itching to be used.
+
+  - title: Easy Wasn't So Easy
+    body: |
+      Firstly, it is technically easy to get an operating system installed on the Zotac Nano if you know a couple of things and have the right ingredients, unfortunately I didn’t.
+
+      If you…
+
+      * are happy installing Windows 7 (possibly XP or Vista)
+      * installed a drive in the Zotac or bought a version with a drive
+      * realize that the USB3 ports aren’t usable before you have an operating system running.
+      * have a portable DVD drive
+
+      …it’s easy.
+
+      I will detail my pains after but I will discuss how to do the ‘easy’ install up front.
+  - title: So How Do I Install Windows?
+    body: |
+      1. You only have two usb slots to work with. If you have a usb keyboard/mouse you are in better shape but if you don&#8217;t you just need to plug in your keyboard for the install.
+      2. The other usb slot is for your portable <span class="caps">DVD</span> drive. If you have a drive that needs two <span class="caps">USB</span> slots then use one of the USB3 slots as I believe it will still draw power. However if the drive is only pluged into the two USB3 slots you will get a driver missing problem during the install and not be able to continue (this tripped me up a few times).
+      3. If you have a <span class="caps">USB</span> windows installer, then plug that into the second USB2 slot instead of the <span class="caps">DVD</span>. However don&#8217;t think that will save you from buying a <span class="caps">DVD</span> drive as until you install the Zotac drivers you can&#8217;t get on the web to do anything. Normally I install the latest drivers from the web but you can&#8217;t access the web to do that until you install the drivers from the provided <span class="caps">DVD</span>. It&#8217;s a real chicken or egg type of thing, lol.
+      4. Wheather your installing from a Windows 7 disk or a Windows 7 <span class="caps">USB</span> stick, simply start the machine and follow the installation instructions.
+      5. Once you have Windows 7 installed then, insert the Zotac driver <span class="caps">DVD</span> and install all the drivers (you may need to unplug your <span class="caps">USB</span> stick and plug in the <span class="caps">DVD</span> drive depending on how you installed).
+
+      That is essentially how &#8220;easy&#8221; it is. &#8230;and of course if you have another computer you could have possibly copied the drivers onto a different <span class="caps">USB</span> stick and used that to install them, instead of the <span class="caps">DVD</span> drive, but I wrote the above under no such assumption.
+
+  - title: What Where My Problems?
+    body: |
+      Well firstly I didn&#8217;t have a portable <span class="caps">DVD</span> drive and I didn&#8217;t have a internal hard drive installed in my Zotac. My plan was to run a Linux based Operating System directly from a <span class="caps">USB</span> stick.
+
+  - title: To Many Unknowns!
+    body: |
+      I wasn&#8217;t overly used to making bootable <span class="caps">USB</span> drives of linux distros and wasn&#8217;t sure if simply using Ubuntu&#8217;s startup disk creator could be used with any Live <span class="caps">ISO</span> linux distrubution. But I had a heck of a time in the beginning. I just remember nothing working. I wasn&#8217;t sure if I wasn&#8217;t creating properly bootable USB&#8217;s, whether the <span class="caps">USB</span> stick itself was faulty, if the new Zotac machine had issues, etc. Thinking back I most likely was encountering some initial problems because of the USB3 slot issue.
+
+      I tryed different Linux disto&#8217;s, creating USB&#8217;s with a different program (UNetBootin), had issues getting <span class="caps">HDMI</span> out working and wasn&#8217;t sure if the cable was faulty, and simply ran into countless little issues across the board. It was quit a trying experience.
+
+  - title: First Sines of Success!
+    body: |
+      After finally getting a couple live linux distos running, verifying the machine could work with linux, I started to focus on what I was actually going to run. I had two working options shortly afterward.
+
+      <a href="http://wiki.xbmc.org/?title=XBMC_Live" title="Visit XMBC Live"><span class="caps">XBMC</span> Live</a> &#8211; navigating the menu system and interating with <span class="caps">XBMC</span> was very sluggish, to the point I moved on (granted I didn&#8217;t spend any time trying to diagnose the issue).
+
+      <a href="www.openelec.tv" title="Visit OpenElec">OpenElec</a> &#8211; less of an actual operating system and more of a direct boot into <span class="caps">XBMC</span>. This to me was less desirable because I knew at some point I would want more functionality. Nas type services come to mind, but in the meantime I just wanted to have a functional media center.
+
+      OpenElec worked well and I was quite impressed. It was fast to boot up and very responsive. I actually used this for a week without too much issue. Occasionaly the system would freeze and I would have to hard boot to get it back, but I was living with the intermittent pain. Unfortuately the crashes started becoming more frequent and finnally after the last hard reboot the system was corupt, and failed to work anymore.
+
+  - title: Decided To Go With Windows 7
+    body: |
+      After all the headache of downloading multible ISO&#8217;s and creating USB&#8217;s, I was tired of &#8220;playing around&#8221; and just wanted the Zotac to work. Knowing I could do everything I wanted with Windows 7, and that it was offically supported, I caved and went about installing it.
+
+      Little did I know I would have more issues even going the &#8220;easy&#8221; route.
+
+      I tried creating a bootable <span class="caps">USB</span> from a Windows 7 <span class="caps">DVD</span> and that was a bit of a process, then I encoutered the &#8220;driver issue&#8221; when I tried to install it. I believe that was do to the USB3 issue again, but I wasn&#8217;t sure at the time. I attemped other various ways to create a Windows 7 bootable <span class="caps">USB</span> stick. No Luck. I try&#8217;d different version&#8217;s of windows (32bit and 64bit), but none could get throught the install process. Finnally I conceded that I couldn&#8217;t get Windows 7 installed to or running from a <span class="caps">USB</span> stick.
+
+  - title: Caved and bought a DVD drive and a Solid State Drive
+    body: |
+      I finnally gave up on the whole running an Operating System from a <span class="caps">USB</span> idea, and went out and bought the <span class="caps">DVD</span> drive and a hard drive. Thats when I figured out the &#8220;easy&#8221; way to install an Operating System on The Zotac Nano, which I described above.
+
+      It was a long painfull process but I can now report that the Zotac Nano actually runs really well. I installed the <span class="caps">XBMC</span> software on it and everything is working great. I&#8217;m also happy I decieded to go with windows as I can also play games on this little machine fairly well!
+
+      All and all I am happy but I certainly wish I had an easier time arriving at a working machine. &#8230;but that is life in the IT lane sometimes ;)

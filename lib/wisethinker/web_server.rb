@@ -21,20 +21,21 @@ module Wisethinker
 
     get '/listings/?' do
       documents = settings.docs.listing(ACCEPTABLE_LISTING_TYPES)
-      slim :listing, layout: :layout_listing, locals: {documents: documents, listing_type: 'All'}
+      slim :listing, layout: :layout_listing, locals: {documents: documents, documents_all: documents, listing_type: 'All'}
     end
 
     get '/listings/:type' do
       halt(404) unless ACCEPTABLE_LISTING_TYPES.include?(params[:type])
+      documents_all = settings.docs.listing(ACCEPTABLE_LISTING_TYPES)
       documents = settings.docs.listing(params[:type])
-      slim :listing, layout: :layout_listing, locals: {documents: documents, listing_type: params[:type]}
+      slim :listing, layout: :layout_listing, locals: {documents: documents, documents_all: documents_all, listing_type: params[:type]}
     end
 
     get '/:type/:url_name' do
       document = settings.docs.document(type: params[:type], url_name: params[:url_name])
       halt(404) unless document
-      documents = settings.docs.listing(ACCEPTABLE_LISTING_TYPES)
-      slim :document, layout: :document_layout, locals: {document: document, documents: documents}
+      documents_all = settings.docs.listing(ACCEPTABLE_LISTING_TYPES)
+      slim :document, layout: :document_layout, locals: {document: document, documents_all: documents_all}
     end
 
     not_found do

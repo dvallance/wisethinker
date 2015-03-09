@@ -1,0 +1,40 @@
+---
+type: book-review
+url_name: the-docker-book
+title: "The Docker Book: Containerization is the new virtualization"
+author: James Turnbull
+date: '2014-12-02'
+
+sections:
+  - title: Content
+    body: |
+      This book simply takes you on a very well structured, guided tour of Docker.
+
+  - title: Target Audience
+    body: |
+      The target audience is developers and system operators, with familiarity of Linux/Unix command line operations.
+
+  - title: Subject/Content Completeness
+    body: |
+      This book will take you from knowing nothing about Docker to having a very solid understanding of the subject. ...but in truth understanding how docker works, in my opinion, is not that difficult. I believe the effort comes from knowing when best to use, and apply Docker for your own needs. Thats were this books worth starts to come to the forefront as it provides a number of use case examples.
+
+      Examples include the following...
+
+      1. Testing a Static Website -  involves replicating a production environment for testing a static website with Nginx locally.
+      2. Building and Testing a Web Application - in this example it is a Sinatra web application with a Redis back end.
+      3. Using Docker for Continuous Integration - focuses on a more  multi-developer role, using Jenkins for CI.
+      4. A Jekyll Application - a process for building a static site via Jekyll and then severing the web application with Apache.
+      5. A Java Application Server - fetching Java applications from WAR files and serving them via a Tomcat server.
+      6. A Multi-Container Applications Stack - serving up a Node application, with Redis and Redis replicas.
+
+      The examples do a good job of "inciting ideas" and you'll certainly be imagining your own use cases for Docker; but they most certainly will <em>not</em> answer all your questions. For example I'm still uncertain as to the best ways to manage Docker files and the data they rely on; since Docker files can only import data under the same directory, there are organizational and pre-processor based decisions to be made.
+
+  - title: Clarity and Readability
+    body: |
+      The information itself is presented in a very logical progression and flows nicely, I found it a very enjoyable read.
+
+      Its a short book and can be easily read in a single evening; unless of course you are working in your terminal as you progress. The book <em>is</em> designed to be used that way and depending on how much you "play around" I imagine it would extend the length of time considerably. I did a complete read through of the material first and then later came back to work through examples over the course of a week of "experimenting/testing".
+
+  - title: Summary
+    body: |
+      All and all I found it an enjoyable read and I believe it was a great way to kick-start my learning of Docker! Its definitely <em>not</em> a must read as there is a lot of great information online, but it does present the subject in a nicely laid out format with enough examples to get you excited to start trying Docker out.

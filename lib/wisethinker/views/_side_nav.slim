@@ -10,7 +10,7 @@ nav id="side-nav" class="inactive"
   - Wisethinker::ACCEPTABLE_LISTING_TYPES.sort.each do |type|
     a href="/listings/#{type}" #{titleize(type).pluralize}
   h2 Latest Postings
-  - documents.take(5).each do |doc|
+  - documents_all.take(5).each do |doc|
     a href="/#{doc.type}/#{doc.url_name}"
       == doc.title
   h2 Projects

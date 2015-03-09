@@ -1,0 +1,31 @@
+---
+type: book-review
+url_name: stylin-with-css-3rd-edition
+title: Stylin' with Css 3rd Edition
+author: Charles Wyke-Smith
+date: '2015-02-26'
+
+sections:
+  - title: Content
+    body: |
+      The book focuses on describing the capabilities of the CSS language, and the advanced CSS3 functionality.
+
+  - title: Target Audience
+    body: |
+      While the book suggests its for a "newbie" or beginner, I think the book is much more catered to an intermediate level developer that likes to have a reference book at hand.
+
+  - title: Subject/Content Completeness
+    body: |
+      The first Chapter quickly goes over HTML markup, since you need something to apply CSS styles to. It is really brief, just giving the essentials, but this book is about CSS so I would assume the reader should already be familiar with HTML?
+
+      After the minimal HTML lesson its into the core topic of this book, CSS. Which is covered very thoroughly in a "this is how it works" kinda way. It covers everything you need to know, but gives no information outside the very straight forward application of CSS. There is no discussion on how to best structure and organize your CSS files; no design considerations to make a web site appealing or professional looking; essentially little to no actual opinion on anything out side of the straight up application details of CSS.
+
+      I did like how the author showed the creation of a grid, which he demonstrated using by using it to control spacing while he styled a web page. There was also some examples of common page layouts and a smattering of other possibly useful examples but nothing exciting enough to suggest this books usefulness as anything other then a good reference to have at hand.
+
+  - title: Clarity and Readability
+    body: |
+      It is a well written book and layout out in a way that makes it an excellent reference. All the Chapters cover a main concept and are subdivided into more specific areas. Structured the way it is you can easily navigate to any area of interest using the Table of Contents. So whatever it is that you need a quick refresher on, you'll find it in seconds.
+
+  - title: Summary
+    body: |
+      The Coverage of CSS is quite complete, however despite having "a Designers Guide" in the title, I think this book is really best used as CSS reference. It gives you all the important details in order to understand and apply CSS but no real incite on how to actually "design" a professional looking web site. Which is what I was actually more interested in when I pick this book up.
