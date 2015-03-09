@@ -22,7 +22,7 @@ sections:
 
   - title: Whats running this Site?
     body: |
-      I was previously using a static site generator for my website, specifically Jeykll. I have some older articles on that subject [Getting Started With Jeykll](/getting-started-with-jeykll) and [Default Naming Conventions of Posts in Jeykll](/jeykll-how-post-naming-works). It worked well but since static sites are kinda limiting, and I had the extra time, I quickly built my own dynamic site.
+      I was previously using a static site generator for my website, specifically Jeykll. I have some older articles on that subject [Getting Started With Jeykll](/article/getting-started-with-jeykll) and [Default Naming Conventions of Posts in Jeykll](/article/jeykll-how-post-naming-works). It worked well but since static sites are kinda limiting, and I had the extra time, I quickly built my own dynamic site.
 
       For details on how this site is built and served checkout [About this Site](/reference/about-site)
 

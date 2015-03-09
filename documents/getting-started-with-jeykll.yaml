@@ -1,0 +1,69 @@
+---
+type: article
+url_name: getting-started-with-jeykll
+title: Getting Started With Jeykll
+date: '2012-02-17'
+code_examples: true
+update:
+  date: '2015-03-08'
+  body: |
+    In this article I reference *"this site"* and describe using Jeykll. ...just to be clear, I no longer use Jeykll and instead have built my own application. See [Launching this Site!](/news/new-site)
+
+sections:
+  - title:
+    body: |
+      When I decided to create this site I wanted to try out a static site generator so I chose to use Jeykll.
+
+  - title: "Why Jeykll?"
+    body: |
+     1. I already live in the ruby world, so I wanted an easy to install gem.
+     2. According to The Ruby Toolbox, Jekyll was a popular choice (to me that means it’s doing something right).
+     3. After a quick glance at its documentation, I liked its simplistic appoach.
+     4. Supports the Textile markup language (which I’m familier with and like).
+     5. Supports the Markdown markup language (which I wanted to try out).
+     6. Uses the Liquid templating engine (which I also wanted to try).
+
+  - title: Starting Out
+    body: |
+      In all honestly as simple as Jeykll is (once you’ve figured it out), I didn’t find it documented well. By that I mean it did’t really have a good “how to get started” area. The documentation is complete but not organized well and I felt it was definately a “look at the code” and “look at sample sites” to figure things out.
+
+      As a starting point, I don’t like grabbing someone else’s code and working off of it. I prefer to build everything from scratch; so thats how I started. After I created the basic site structure I was ready to start building the layouts and pages.
+
+      <pre>
+      <code class="language-bash">#example directory structure
+       .
+       |-- _config.yml
+       |-- _includes
+       |-- _layouts
+       |-- _posts
+       |-- _site
+       |-- index.html</code>
+      </pre>
+
+  - title: Adding Pages, Layouts and Posts
+    body: |
+      This is where I started down the wrong path and I had a fustrating beginning. I assumed that the layouts could be created in one of the supported markup languages, but I believe they can’t or at least I haven’t figured out how.
+
+      The documentation says:
+
+      *Provided that the file has a YAML Front Matter section, it will be transformed by Jekyll. The same will happen for any .html, .markdown, or .textile file in your site’s root directory or directories not listed above.*
+
+      It’s hard to interprete the “directories not listed above” part, since _posts is “listed above” and works, but _layouts is also “listed above” but doesn’t seem to. I looked through about 5 or 6 sample sites and all of them had .html layout pages. So, again I assume you can’t use markup for layouts.
+
+      The bad start continued as a few syntax errors on my part also caused some issues and I was really stumbling around trying to figure out why things weren’t working. I wasn’t feeling to great about my decision to go with Jeykll at this point.
+
+  - title: Pushing Forward
+    body: |
+      I knew that there was a “programming” element to Jeykll and that through Liquid I would be able to list posts and access there data, but being new to both Jeykll and Liquid I wasn’t sure how to begin. Unfortuately I missed finding the “Template Data” section in the offical documentation and I relied more on looking through other site examples to figure out what I had access to. Again I wish the documention lead you through the process better.
+
+      Finally I had figured out enough to get things working, and after finding the proper section on the Template Data I was off to the races.
+
+  - title: "Where Do I Stand Now?"
+    body: |
+      Well I have to say that, even after a rocky start, I do like Jeykll. I continue to like Textile but Markdown never really did it for me (information on creating attributes with markdown is not easily found, if you can?).
+
+  - title: Continuing
+    body: |
+      I need to figure out the naming conventions on posts, as I don’t like the date being a part of the file name itself (removing the date caused the post to not be detected at all). I also need to look at how tags and related posts work, so thats what I will be looking at next. Until then I have a pretty nice start to my new site and understanding Jeykll better.
+
+      I will follow up with another post when I’ve learned more.
