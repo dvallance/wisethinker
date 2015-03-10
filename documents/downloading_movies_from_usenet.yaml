@@ -30,12 +30,11 @@ sections:
 
   - title: Usenet vs Torrents, Whats the difference?
     body: |
-
       ##Entry Level
 
       Torrents have a lower entry level. You basically have to choose and install a torrent client application. Then visit a torrent listing website and click a download button. Finding a torrent site is fairly quick as they are free and quickly accessed for the value they bring to the table.Choosing a torrent client possibly requires trying out a few to see which one you like the best or simply doing a web search and seeing what seems to be the most popular for your operating system, but it two is relatively simple.
 
-    Usenet also requires decisions to be made and they are a lot more difficult and time consuming. I'll describe this in more detail below but in short the decisions are: choose a service provider, find a good Usenet indexer, install a Usenet client application and also configure that client.
+      Usenet also requires decisions to be made and they are a lot more difficult and time consuming. I'll describe this in more detail below but in short the decisions are: choose a service provider, find a good Usenet indexer, install a Usenet client application and also configure that client.
 
       ##Cost
 
@@ -84,7 +83,8 @@ sections:
       Much like Piratebay's issues with legal action, Usenet indexers have also been targeted by the Motion Picture Association (MPAA). NewzBin was an amazing Usenet indexing site but closed on November 28, 2012. This was the indexer I used years ago and I was sad to see that it no longer existed. For alternatives you'll have to try out some and see what you like.
 
       SABnzbd has a [list of options](http://wiki.sabnzbd.org/nzb-sources)
-      also see [Best NZB Site List](http://usenetreviewz.com/nzb-sites/)
+
+      ...also see [Best NZB Site List](http://usenetreviewz.com/nzb-sites/)
 
       ##Pain Point
 
@@ -100,7 +100,6 @@ sections:
 
   - title: Install and Configure Client Software
     body: |
-
       I mentioned NZB files when talking about Usenet indexers. An NZB file is basically a set of instructions with which the client software is designed to follow and download the actual content. In reality a movie for example isn't stored on Usenet as 1 file but actually many smaller files that all need to be downloaded. Its generally a compressed file that is split into many parts, so the client also has to join and uncompress the final file. Thankfully NZB files and the client software handles all this for you and abstracts away the complexity.
 
       There are two main chooses for the client software [SABnzbd](http://sabnzbd.org/) or [NZBGet](http://nzbget.net/). I believe either works in  Windows, Mac, or Linux. You honestly can't go wrong with either. If you read through comparisons you might find varying levels of performance and download speeds but for the most part they will be negligible. Just visit both web sites and go with whichever one seems easier to navigate, etc.
@@ -108,4 +107,3 @@ sections:
       ##Configure
 
       Your Usenet provider will supply you with a server address, username, and password. You will have to configure your client to use these to be able to download. Just check the documentation for which ever client you download; both are fairly straight forward to configure.
-
