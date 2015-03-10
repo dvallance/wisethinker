@@ -6,7 +6,7 @@ require 'active_support/core_ext/string/inflections'
 
 module Wisethinker
 
-  #White list document types that are [view|search]able
+  #White list document types that will show in listings
   ACCEPTABLE_LISTING_TYPES = ['news', 'book-review', 'article']
 
   class WebServer < ::Sinatra::Base

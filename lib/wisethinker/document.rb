@@ -2,15 +2,18 @@ module Wisethinker
 
   class Document < JsonObject::Base
 
-    def self.load json
-      case json['type']
-      when 'article'
-        Article.new(json)
-      when 'book-review'
-        BookReview.new(json)
-      when 'news'
-        News.new(json)
+    def self.class_from_type type
+      klass_name = type.split("-").map{|str| str.capitalize}.join
+      begin
+          Object.const_get(json['type'])
+      rescue
+          #default to Article if the type doesn't have a defined class
+          Article
       end
+    end
+
+    def self.load json
+      class_from_type(json['type']).new(json)
     end
 
     alias_method :json, :json_object_hash
@@ -54,6 +57,4 @@ module Wisethinker
     json_value_accessors :author
   end
 
-  class News < Article
-  end
 end
