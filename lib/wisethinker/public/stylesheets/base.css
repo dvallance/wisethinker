@@ -196,19 +196,22 @@ body article {
   line-height: 1rem;
   margin-bottom: 4rem;
 }
-body article a::before {
+body article a:not([name])::before {
   content: ' ( ';
 }
-body article a::after {
+body article a:not([name])::after {
   content: ' ) ';
 }
-body article a:link,
-body article a:active,
-body article a:visited {
+body article a:not([name]):link,
+body article a:not([name]):active,
+body article a:not([name]):visited {
   color: #008080;
 }
-body article a:hover {
+body article a:not([name]):hover {
   color: #004040;
+}
+body article a[name] {
+  visibility: hidden;
 }
 body article em {
   margin-left: 5px;

@@ -188,17 +188,22 @@ body
     line-height 1rem
     margin-bottom 4rem
 
-    a::before
-      content: ' ( '
+    a:not([name])
 
-    a::after
-      content: ' ) '
+      &::before
+        content: ' ( '
 
-    a:link, a:active, a:visited
-      color #008080
+      &::after
+        content: ' ) '
 
-    a:hover
-      color #004040
+      &:link, &:active, &:visited
+        color #008080
+
+      &:hover
+        color #004040
+
+    a[name]
+      visibility hidden
 
     em
       margin-left 5px
