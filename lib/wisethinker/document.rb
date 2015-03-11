@@ -5,7 +5,7 @@ module Wisethinker
     def self.class_from_type type
       klass_name = type.split("-").map{|str| str.capitalize}.join
       begin
-          Object.const_get(json['type'])
+          Object.const_get(json_hash['type'])
       rescue
           #default to Article if the type doesn't have a defined class
           Article
@@ -15,8 +15,6 @@ module Wisethinker
     def self.load json
       class_from_type(json['type']).new(json)
     end
-
-    alias_method :json, :json_object_hash
 
     def markdown_renderer
       return @markdown_renderer if defined? @markdown_renderer

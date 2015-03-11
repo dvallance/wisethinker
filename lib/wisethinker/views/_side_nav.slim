@@ -9,7 +9,7 @@ nav id="side-nav" class="inactive"
   a href="/listings" All
   - Wisethinker::ACCEPTABLE_LISTING_TYPES.sort.each do |type|
     a href="/listings/#{type}" #{titleize(type).pluralize}
-  h2 Latest Postings
+  h2 5 Latest Postings
   - documents_all.take(5).each do |doc|
     a href="/#{doc.type}/#{doc.url_name}"
       == doc.title
