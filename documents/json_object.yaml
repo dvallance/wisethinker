@@ -1,0 +1,423 @@
+---
+type: project
+url_name: json-object
+title: JsonObject - accessing Json Hashes like a beast!
+date: '2015-03-11'
+code_examples: true
+
+sections:
+  - title:
+    body: |
+      I built this gem to allow more control when working with Json. Instead of just navigating a Json Hash directly I wanted a quick and easy way to define a custom object for that purpose; define accessor names, default values, and even write value manipulation code.
+
+      Quick Navigation:
+
+      - [Installation](#installation)
+      - [JSON.load](#json-load)
+      - [Using JsonObject](#using-jsonobject)
+      - [What about OpenStruct?](#open-struct)
+      - [Custom Accessor Names](#custom-accessor-names)
+      - [Default Values](#default-values)
+      - [Data Manipulation with Procs](#procs)
+      - [Caching](#caching)
+      - [Nested Objects](#nested-objects)
+      - [Arrays](#arrays)
+      - [Default Object Class](#default-object)
+      - [In Closing](#closing)
+
+      <a name="installation"></a>
+
+  - title: Installation
+    body: |
+      I plan to release this on RubyGem's once I cleanup and document the code. Until then you can include the github project in your Gemfile. You are using Bundler right!?
+
+      <pre>
+      <code class="language-ruby">gem 'json_object',
+        git: 'https://github.com/dvallance/json_object.git'
+
+      #and require if needed.
+      require 'json_object'</code>
+      </pre>
+
+      <a name="json-load"></a>
+
+  - title: JSON.load
+    body: |
+      This is how you would typically access the values from Json.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
+
+      json = JSON.load(json_string)
+      => {"name"=>"John Smith", "age"=>21}
+
+      #we are working with a Hash
+      json.class
+      => Hash
+
+      #to get the name value
+      json["name"]
+      => "John Smith"
+
+      #to get the age value
+      json["age"]
+      => 21</code>
+      </pre>
+
+
+      Here are the things that I would like to improve apon.
+
+      ##Custom Class Name
+
+      We can't infer anything about the underlying Json from a Hash class name. I want to be able to give it some meaning with a specific name.
+
+      ##Accessor Method Names
+
+      To get the values we must call the [] method with a string agrument, instead I want to have a properly defined accessor method for each value I care about.
+
+      <a name="using-jsonobject"></a>
+
+  - title: Using JsonObject
+    body: |
+      Here we have a simple implementaion of using JsonObject, which addresses the improvements I mention above.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
+
+      #first we create a class to represent the json
+      class Person < JsonObject::Base
+        #we define accessors for the underlying json hash
+        json_value_accessor :name
+        json_value_accessor :age
+      end
+
+      #now using the same json_string as above we create a Person
+      #which really just wraps the json hash and allows for defining
+      #accessors
+      json = Person.new(JSON.load(json_string))
+
+      #we are working with a Hash
+      json.class
+      => Person
+
+      #to get the name value
+      json.name
+      => "John Smith"
+
+      #to get the age value
+      json.age
+      => 21</code>
+      </pre>
+
+      ...you see we have used a *custom class name* to give the object some more meaning, and we also can use *accessor methods* to get at the data.
+
+      <a name="open-struct"></a>
+
+  - title: What about OpenStruct?
+    body: |
+      We can do something similar with OpenStruct, and I will show how JsonObject actually takes advantage of OpenStruct, later on, when we deal with nested objects.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
+
+      json = OpenStruct.new(JSON.load(json_string))
+
+      #we are working with an OpenStruct, which isn't as helpful
+      #as a custom class name
+      json.class
+      => OpenStruct
+
+      #to get the name value
+      json.name
+      => "John Smith"
+
+      #to get the age value
+      json.age
+      => 21</code>
+      </pre>
+
+      If you don't care about the custom class name this seems decent, but if you start using OpenStruct you will soon find it doesn't deal with nested json objects well. Feel free to test it out, or trust me that it starts to become limited with more complex Json.
+
+      <a name="custom-accessor-names"></a>
+
+  - title: What else can JsonObject do for us?
+    body: |
+      ##Custom Accessor Names
+
+      Using the same json as above, lets say I wanted to get the name value as *full_name* not *name*.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
+
+      class Person < JsonObject::Base
+        #we give the name of the attribute of the json hash but also
+        #provide a "name" option
+        json_value_accessor :name, name: :full_name
+        #equivalent ways to define
+        #json_value_accessor :name, name: "full_name"
+        #json_value_accessor "name", name => "full_name"
+      end
+
+      json = Person.new(JSON.parse(json_string))
+
+      #the accessor is named full_name
+      json.full_name
+      => "John Smith"
+
+      #a name accessor dosn't exist
+      json.name
+      => NoMethodError: undefined method `name' ...</code>
+      </pre>
+
+      <a name="default-values"></a>
+
+      ##Default Values
+      How about providing a default value if one dosen't exist?
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
+
+      class Person < JsonObject::Base
+        #a value that isn't defined on our json string
+        json_value_accessor :allergic_to_cats
+        #another missing value but this time we supply a 'default'
+        json_value_accessor :afraid_of_dogs, default: true
+      end
+
+      json = Person.new(JSON.parse(json_string))
+
+      #since allergic_to_cats isn't defined we get a nil
+      json.allergic_to_cats
+      => nil
+
+      #with the default value we won't get a nil, but the 'default'
+      #supplied in the option
+      json.afraid_of_dogs
+      => true</code>
+      </pre>
+
+      Here we see we can define any accessors we wish and if they are not actually represented in the underlying Json then a *nil* will be returned by default. ...or we can supply our own default.
+
+      <a name="procs"></a>
+
+      ##Data manipulation with Procs
+
+      Ok lets get into some really fun stuff. Lets continue working with the original Json and this time we want to declare accessors for *first_name*, *last_name* and *full_name*. The wrinkle is that we need to get this information from the *name* value which happens to contain full name values.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
+
+      class Person < JsonObject::Base
+        json_value_accessor :name, name: :first_name,
+          proc: Proc.new{|json_object, value| value.split(' ').first}
+        json_value_accessor :name, name: :last_name,
+          proc: Proc.new{|json_object, value| value.split(' ').last}
+        json_value_accessor :name, name: :full_name
+      end
+
+      json = Person.new(JSON.parse(json_string))
+
+      #first_name's value was actually parsed fron "name"
+      json.first_name
+      => "John"
+
+      #last_name's value was actually parsed fron "name"
+      json.last_name
+      => "Smith"
+
+      #and finnaly full_name is the "name" value
+      json.full_name
+      => "John Smith"</code>
+      </pre>
+
+      TODO: parent_object
+
+      Using procs can be applied in some interesting ways and gives quite a bit of power. Have no fear if the proc does a large amount of calculation as the result is only caculated once and the result is cached for repeated calls. ...which I should call attention too!
+
+      <a name="caching"></a>
+
+  - title: Caching
+    body: |
+      All accessors defined for a JsonObject have built in caching. The first time an accessor is call the actual work is done to find the value, after which this value is cached and subsequent calls are simply returned from it.
+
+      <a name="nested-objects"></a>
+
+  - title: Nested Objects
+    body: |
+      Lets discuss the various ways to deal with nested Json objects.
+
+      ##Treat it as a Hash
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21,
+      "additional_info":{ "email":"jsmith@my_mail",
+        "phone_number":"555-555-5555"}}'
+
+      class Person < JsonObject::Base
+        json_value_accessor :additional_info
+      end
+
+      json = Person.new(JSON.parse(json_string))
+
+      #as you can see we simply access the nested object
+      #'additional_info' as a Hash
+      json.additional_info
+      => {"email"=>"jsmith@my_mail", "phone_number"=>"555-555-5555"}
+
+      json.additional_info.class
+      => Hash</code>
+      </pre>
+
+      ##Allow JsonObject to use a Default Object Handler
+
+      I talked about OpenStruct earlier, and by default JsonObject will handle a nested Object with essentially an OpenStruct. Specifically it is called JsonOpenStruct, as I needed to have a special initializer for it to function how I wanted.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21,
+      "additional_info":{ "email":"jsmith@my_mail",
+        "phone_number":"555-555-5555"}}'
+
+      class Person < JsonObject::Base
+        #NOTE: we use json_object_accessor NOT json_value_accessor
+        json_object_accessor :additional_info
+      end
+
+      json = Person.new(JSON.parse(json_string))
+
+      #as you can see by default we have a JsonOpenStruct object
+      #which is functionally equivalent to OpenStruct.new(Hash)
+      json.additional_info.class
+      => JsonObject::JsonOpenStruct
+
+      #getting values from the nested object
+      json.additional_info.email
+      => "jsmith@my_mail"
+
+      #and the phone_number
+      json.additional_info.phone_number
+      => "555-555-5555"</code>
+      </pre>
+
+      ##Create another Custom Class
+
+      This is the way to go if you want to use all the power of JsonObject on the nested object too!
+
+      Everything we have described up and until now can be applied to nested objects if you create another custom class.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith", "age":21,
+      "additional_info":{ "email":"jsmith@my_mail",
+        "phone_number":"555-555-5555"}}'
+
+      class AdditionalInfo < JsonObject::Base
+        #here we have all the power of naming, defaults, and procs
+
+        #also I'll demonstrate the alternate way of defining accessors
+        #useing the plural form.
+        json_value_accessors :email, :phone_number
+      end
+
+      class Person < JsonObject::Base
+        #here we specify the AdditionalInfo class we declared above
+        json_object_accessor :additional_info, class: AdditionalInfo
+      end
+
+      json = Person.new(JSON.parse(json_string))
+
+      #you can see our custom class
+      json.additional_info.class
+      => AdditionalInfo
+
+      #add of course getting the values of the nested object
+      json.additional_info.email
+      => "jsmith@my_mail"
+
+      #and the phone_number
+      json.additional_info.phone_number
+      => "555-555-5555"</code>
+      </pre>
+
+      This is basically how nested objects work and they can be as deaply nested as practical. You simply apply the same approach. Create custom classes for each level of nested object and define the accessors appropriately.
+
+      <a name="arrays"></a>
+
+  - title: What about Arrays?
+    body: |
+      An array on a json\_value\_accessor is simply returned as an array.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith",
+        "favorite_colors":["red","blue", "green"]}'
+
+      class Person < JsonObject::Base
+        #using plural form again
+        json_value_accessors :email, :favorite_colors
+      end
+
+      json = Person.new(JSON.parse(json_string))
+
+      #you can see our array is simple treated as an array
+      json.favorite_colors
+      => ["red", "blue", "green"]</code>
+      </pre>
+
+      Arrays of objects are handled similarity but the Array would contain Hashes, JsonOpenStruct, or Custom Class Objects; depending on how you declared your accessor.
+
+      <pre>
+      <code class="language-ruby">json_string = '{"name":"John Smith",
+      "favorite_colors":[{"color":"red", "hex_code":"ff4040"},
+      {"color":"blue", "hex_code":"3b5998"}]}'
+
+      class Person < JsonObject::Base
+        json_value_accessor :favorite_colors
+      end
+
+      json = Person.new(JSON.parse(json_string))
+
+      #as you can see its simply an Array of Hashs
+      json.favorite_colors
+      => [{"color"=>"red", "hex_code"=>"ff4040"},
+        {"color"=>"blue", "hex_code"=>"3b5998"}]
+
+      #assume we declared person like this
+      class Person < JsonObject::Base
+        json_object_accessor :favorite_colors
+      end
+
+      #we would have an Array of or default JsonOpenStruct classes
+      json.favorite_colors.map {|item| item.class}
+      => [JsonObject::JsonOpenStruct, JsonObject::JsonOpenStruct]
+
+      #and if we had given a custom class
+      class Color < JsonObject::Base
+        json_object_accessors :color, :hex_code
+      end
+
+      class Person < JsonObject::Base
+        json_object_accessor :favorite_colors, class: Color
+      end
+
+      #if we look at the classes we have our two Color's in an array
+      json.favorite_colors.map{|item| item.class}
+      => [Color, Color]</code>
+      </pre>
+
+      <a name="default-object"></a>
+
+  - title: Default Object Class
+    body: |
+      I'm not sure if this will be very useful but I have allowed the ability to declare a custom class to use as the default for all objects.
+
+      <pre>
+      <code class="language-ruby">JsonObject.default_json_object_class
+      => JsonObject::JsonOpenStruct
+
+      #set the default with
+      JsonObject.default_json_object_class = YourCustomClass</code>
+      </pre>
+
+      <a name="closing"></a>
+
+  - title: In Closing
+    body: |
+      I've been using this gem to power my website and have found it very useful. Hopefully others will as well. If there are any thoughts on making it better feel free to share. Thanks!
