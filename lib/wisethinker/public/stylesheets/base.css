@@ -36,10 +36,13 @@ html {
   transform: scale(0.9, 0.9);
 }
 #side-nav-open {
+  position: absolute;
   font-size: 1rem;
   transition: display 2s;
   color: #084b8a;
   float: left;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 0.2rem;
 }
 #side-nav-open:hover {
   cursor: pointer;
@@ -169,6 +172,7 @@ body nav a:hover {
   margin-left: 2px;
 }
 body > h1 {
+  padding-top: 20px;
   text-align: center;
   color: #999;
   line-height: 2rem;
