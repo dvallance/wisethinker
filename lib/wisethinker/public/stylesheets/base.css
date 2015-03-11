@@ -36,8 +36,9 @@ html {
   transform: scale(0.9, 0.9);
 }
 #side-nav-open {
-  font-size: 2rem;
+  font-size: 1rem;
   transition: display 2s;
+  color: #084b8a;
   float: left;
 }
 #side-nav-open:hover {
