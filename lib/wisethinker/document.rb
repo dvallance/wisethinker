@@ -13,7 +13,7 @@ module Wisethinker
     end
 
     def self.load json
-      class_from_type(json['type']).new(json)
+      class_from_type(json['type']).init_from_json_hash(json)
     end
 
     def markdown_renderer

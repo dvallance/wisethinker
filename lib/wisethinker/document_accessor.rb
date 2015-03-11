@@ -21,7 +21,7 @@ module Wisethinker
     end
 
     def upsert_document document
-      storage_accessor.upsert({type: document.type, url_name: document.url_name }, document.json_object_hash)
+      storage_accessor.upsert({type: document.type, url_name: document.url_name }, document.json_hash)
     end
 
   end
