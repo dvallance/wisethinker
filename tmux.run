@@ -17,7 +17,7 @@ if [ $? -eq 1 ]; then
   tmux split-window -v -p 50
   tmux split-window -v -p 50
   tmux select-pane -t 2
-  tmux send-keys 'cd lib/wisethinker && stylus css --watch --out public/stylesheets' C-m
+  tmux send-keys 'cd lib/wisethinker && stylus css --watch --out public/css' C-m
   tmux select-pane -t 1
   tmux send-keys 'bundle exec shotgun' C-m
   tmux select-pane -t 0

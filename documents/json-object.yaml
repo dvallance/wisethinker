@@ -1,6 +1,6 @@
 ---
-type: project
-url_name: json-object
+type: json-object
+url_name: index
 title: JsonObject - accessing Json Hashes like a beast!
 date: '2015-03-11'
 code_examples: true
@@ -8,10 +8,9 @@ code_examples: true
 sections:
   - title:
     body: |
-      I built this gem to allow more control when working with Json. Instead of just navigating a Json Hash directly I wanted a quick and easy way to define a custom object for that purpose; define accessor names, default values, and even write value manipulation code.
-
       Quick Navigation:
 
+      - [Whats it do? Give me a quick example!](#whats-it-do)
       - [Installation](#installation)
       - [JSON.load](#json-load)
       - [Using JsonObject](#using-jsonobject)
@@ -24,6 +23,85 @@ sections:
       - [Arrays](#arrays)
       - [Default Object Class](#default-object)
       - [In Closing](#closing)
+      - [Understanding JsonObject\#json\_value\_accessor](/json-object/json-value-accessor)
+
+        <a name="whats-it-do"></a>
+
+  - title:
+    body: |
+      I built this gem to allow more control when working with JSON. Instead of just navigating a Json Hash directly I wanted a quick and easy way to define a custom object for that purpose; define accessor names, default values, and even write value manipulation code.
+
+      As an example if I have this JSON...
+
+      <pre>
+      <code class="language-ruby">{
+          "mythologies": [
+              {
+                  "type": "Norse",
+                  "gods": [
+                      {
+                          "name": "Thor",
+                          "description": "God of thunder and battle"
+                      },
+                      {
+                          "name": "Loki",
+                          "description": "Trickster and god of mischief"
+                      }
+                  ]
+              },
+              {
+                  "type": "Greek",
+                  "gods": [
+                      {
+                          "name": "Zeus",
+                          "description": "God of the sky"
+                      },
+                      {
+                          "name": "Ares",
+                          "description": "Trickster and god of mischief"
+                      }
+                  ]
+              }
+          ]
+      }</code>
+      </pre>
+
+
+      I want to be able to access it like this!
+
+      <pre>
+      <code class="language-ruby">mythologies.count
+      => 2
+
+      mythologies.first.class
+      => Mythology
+
+      mythologies.first.type
+      => "Norse"
+
+      mythologies.first.gods.count
+      => 2
+
+      mythologies.first.gods.first.name
+      => "Thor"</code>
+      </pre>
+
+      So how would we accomblish that using JsonObject?
+
+      <pre>
+      <code class="language-ruby">#These are just 3 lines. I separated them for easier viewing ;)
+      God = JsonObject.create.
+      value_accessors(:name, :description)
+
+      Mythology = JsonObject.create.json_value_accessors(:type).
+      object_accessor(:gods, class: God)
+
+      mythologies = JsonObject.create.
+      object_accessor(:mythologies, class: Mythology).
+      create(json).mythologies</code>
+      </pre>
+
+      This is just an example of my preferred way to code a solution. There are a number of different ways to create these types of classes/objects with JsonObject.
 
       <a name="installation"></a>
 
