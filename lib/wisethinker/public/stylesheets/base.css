@@ -201,12 +201,6 @@ body article {
   line-height: 1rem;
   margin-bottom: 4rem;
 }
-body article a:not([name])::before {
-  content: ' ( ';
-}
-body article a:not([name])::after {
-  content: ' ) ';
-}
 body article a:not([name]):link,
 body article a:not([name]):active,
 body article a:not([name]):visited {
