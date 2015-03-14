@@ -13,7 +13,7 @@ module Wisethinker
     end
 
     def self.load json
-      class_from_type(json['type']).init_from_json_hash(json)
+      class_from_type(json['type']).create(json)
     end
 
     def markdown_renderer
@@ -34,25 +34,25 @@ module Wisethinker
   end
 
   class Section < Document
-    json_value_accessors :title
-    json_value_accessor :body
-    json_value_accessor :body, name: :rendered_body, proc: Proc.new {|json_object,value|
+    value_accessors :title
+    value_accessor :body
+    value_accessor :body, name: :rendered_body, proc: Proc.new {|json_object,value|
       json_object.render json_object.json_parent.template_engine, value
     }
   end
 
   class Update < Document
-    json_value_accessors :date,[:body, name: :rendered_body,  proc: Proc.new {|json_object,value| json_object.render json_object.json_parent.template_engine, value}]
+    value_accessors :date,[:body, name: :rendered_body,  proc: Proc.new {|json_object,value| json_object.render json_object.json_parent.template_engine, value}]
   end
 
   class Article < Document
-    json_value_accessors :type,:url_name,:title,:date,[:by, default: 'David Vallance'],:author,[:template_engine, default: "markdown"],[:code_examples, default: false]
-    json_object_accessor :update, class: Update
-    json_object_accessor :sections, class: Section
+    value_accessors :type,:url_name,:title,:date,[:by, default: 'David Vallance'],:author,[:template_engine, default: "markdown"],[:code_examples, default: false]
+    object_accessor :update, class: Update
+    object_accessor :sections, class: Section
   end
 
   class BookReview < Article
-    json_value_accessors :author
+    value_accessors :author
   end
 
 end

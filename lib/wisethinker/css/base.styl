@@ -6,9 +6,20 @@ light-grey-color = #999
   margin 0
   border 0
 
-p, ol, ul
+p
   margin-top 1rem
   line-height 1.5rem
+
+ul, ol
+  margin-top 1rem
+  line-height 1.5rem
+  list-style circle
+  list-style-position inside
+  color light-grey-color
+
+li > ul, li > ol
+  margin-top 0
+  margin-left 1rem
 
 a
   font-style normal
@@ -21,12 +32,9 @@ li
   font-style normal
   font-size 1rem
 
-li:before
-  content: "> "
-  color light-grey-color
+li p
+  display inline
 
-ul, ol
-  list-style none
 
 html
   font-size 18px
@@ -253,7 +261,7 @@ body
 
     h2
       color #444444
-      margin-top 1rem
+      margin-top 2rem
       line-height 1.5rem
       text-align left
       font-size 1rem

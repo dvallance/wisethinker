@@ -4,37 +4,44 @@ url_name: index
 title: JsonObject - accessing Json Hashes like a beast!
 date: '2015-03-11'
 code_examples: true
+update:
+  date: '2015-03-14'
+  body: |
+      I'm in the process of, adding to, and organizing this guide so it may change quite a bit in the following week.
+
+      (I'm close to relasing the gem and want good coverage of its features.)
 
 sections:
   - title:
     body: |
       Quick Navigation:
 
-      - [Whats it do? Give me a quick example!](#whats-it-do)
-      - [Installation](#installation)
-      - [JSON.load](#json-load)
-      - [Using JsonObject](#using-jsonobject)
-      - [What about OpenStruct?](#open-struct)
-      - [Custom Accessor Names](#custom-accessor-names)
-      - [Default Values](#default-values)
-      - [Data Manipulation with Procs](#procs)
-      - [Caching](#caching)
-      - [Nested Objects](#nested-objects)
-      - [Arrays](#arrays)
-      - [Default Object Class](#default-object)
-      - [In Closing](#closing)
-      - [Understanding JsonObject\#json\_value\_accessor](/json-object/json-value-accessor)
+      * [Whats it do? Give me a quick example!](#whats-it-do)
+      * [Installation](#installation)
+      * [JSON.load](#json-load)
+      * [Using JsonObject](#using-jsonobject)
+      * [What about OpenStruct?](#open-struct)
+      * [Custom Accessor Names](#custom-accessor-names)
+      * [Default Values](#default-values)
+      * [Data Manipulation with Procs](#procs)
+      * [Caching](#caching)
+      * [Nested Objects](#nested-objects)
+      * [Arrays](#arrays)
+      * [Default Object Class](#default-object)
+      * [In Closing](#closing)
+      * [Understanding JsonObject\#json\_value\_accessor](/json-object/json-value-accessor)
 
         <a name="whats-it-do"></a>
 
   - title:
     body: |
-      I built this gem to allow more control when working with JSON. Instead of just navigating a Json Hash directly I wanted a quick and easy way to define a custom object for that purpose; define accessor names, default values, and even write value manipulation code.
+      I built this gem to allow more control when working with JSON. Instead of just navigating a JSON Hash directly I wanted a quick and easy way to define a custom object for that purpose; define accessor names, default values, and even write value manipulation code.
 
       As an example if I have this JSON...
 
       <pre>
-      <code class="language-ruby">{
+      <code class="language-ruby"># how about some json describing mythologies!
+      {
           "mythologies": [
               {
                   "type": "Norse",
@@ -70,26 +77,55 @@ sections:
       I want to be able to access it like this!
 
       <pre>
-      <code class="language-ruby">mythologies.count
-      => 2
-
-      mythologies.first.class
+      <code class="language-ruby">mythologies.first.class
       => Mythology
 
       mythologies.first.type
       => "Norse"
 
-      mythologies.first.gods.count
-      => 2
+      mythologies.first.gods.first.class
+      => God
 
       mythologies.first.gods.first.name
+      => "Thor"
+
+      Mythology.instance_methods(false).inspect
+      => [:type, :gods]
+
+      God.instance_methods(false).inspect
+      => [:name, :description] </code>
+      </pre>
+
+      ...because there are some immediate advantages over...
+
+      <pre>
+      <code class="language-ruby">json["mythologies"].first.class
+      => Hash
+
+      json["mythologies"].first["type"]
+      => "Norse"
+
+      json["mythologies"].first["gods"].first.class
+      => Hash
+
+      json["mythologies"].first["gods"].first["name"]
       => "Thor"</code>
       </pre>
 
-      So how would we accomblish that using JsonObject?
+      ##Some Immediate Advantages
+
+      - The code itself looks cleaner and is more concise
+      - ...which happily means less typing
+      - With well named classes we can make assumptions about the underlying data
+      - No more miss-typing keys (ever use a symbol instead of a string, fustrating!)
+      - We don't need to load a json source to understand the data
+
+      ##You had me at 'less typing'
+
+      OK. So how would we accomblish accessing these the preferred way? ...using JsonObject!
 
       <pre>
-      <code class="language-ruby">#These are just 3 lines. I separated them for easier viewing ;)
+      <code class="language-ruby"># These are just 3 lines. I separated them for easier viewing ;)
       God = JsonObject.create.
       value_accessors(:name, :description)
 
@@ -101,7 +137,7 @@ sections:
       create(json).mythologies</code>
       </pre>
 
-      This is just an example of my preferred way to code a solution. There are a number of different ways to create these types of classes/objects with JsonObject.
+      This is just an example of my preferred way to code a solution. There are a number of different ways to create these types of classes/objects.
 
       <a name="installation"></a>
 
@@ -164,13 +200,13 @@ sections:
 
       #first we create a class to represent the json
       class Person < JsonObject::Base
-        #we define accessors for the underlying json hash
+        #we define accessors for the underlying JSON hash
         json_value_accessor :name
         json_value_accessor :age
       end
 
       #now using the same json_string as above we create a Person
-      #which really just wraps the json hash and allows for defining
+      #which really just wraps the JSON hash and allows for defining
       #accessors
       json = Person.new(JSON.load(json_string))
 
@@ -228,7 +264,7 @@ sections:
       <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
 
       class Person < JsonObject::Base
-        #we give the name of the attribute of the json hash but also
+        #we give the name of the attribute of the JSON hash but also
         #provide a "name" option
         json_value_accessor :name, name: :full_name
         #equivalent ways to define
