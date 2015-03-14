@@ -7,9 +7,7 @@ code_examples: true
 update:
   date: '2015-03-14'
   body: |
-      I'm in the process of, adding to, and organizing this guide so it may change quite a bit in the following week.
-
-      (I'm close to relasing the gem and want good coverage of its features.)
+    I'm getting close to releasing the JsonObject gem and will be fine tuning this document over the next week. I hope to make it more organized and easier to reference. Changes coming soon.
 
 sections:
   - title:
@@ -117,12 +115,12 @@ sections:
       - The code itself looks cleaner and is more concise
       - ...which happily means less typing
       - With well named classes we can make assumptions about the underlying data
-      - No more miss-typing keys (ever use a symbol instead of a string, fustrating!)
+      - No more miss-typing keys (ever use a symbol instead of a string, frustrating!)
       - We don't need to load a json source to understand the data
 
       ##You had me at 'less typing'
 
-      OK. So how would we accomblish accessing these the preferred way? ...using JsonObject!
+      OK. So how would we accomplish accessing these the preferred way? ...using JsonObject!
 
       <pre>
       <code class="language-ruby"># These are just 3 lines. I separated them for easier viewing ;)
@@ -143,7 +141,7 @@ sections:
 
   - title: Installation
     body: |
-      I plan to release this on RubyGem's once I cleanup and document the code. Until then you can include the github project in your Gemfile. You are using Bundler right!?
+      I plan to release this on RubyGem's once I cleanup and document the code. Until then you can include the Github project in your Gemfile. You are using Bundler right!?
 
       <pre>
       <code class="language-ruby">gem 'json_object',
@@ -179,7 +177,7 @@ sections:
       </pre>
 
 
-      Here are the things that I would like to improve apon.
+      Here are the things that I would like to improve upon.
 
       ##Custom Class Name
 
@@ -187,13 +185,13 @@ sections:
 
       ##Accessor Method Names
 
-      To get the values we must call the [] method with a string agrument, instead I want to have a properly defined accessor method for each value I care about.
+      To get the values we must call the [] method with a string argument, instead I want to have a properly defined accessor method for each value I care about.
 
       <a name="using-jsonobject"></a>
 
   - title: Using JsonObject
     body: |
-      Here we have a simple implementaion of using JsonObject, which addresses the improvements I mention above.
+      Here we have a simple implementation of using JsonObject, which addresses the improvements I mention above.
 
       <pre>
       <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
@@ -278,7 +276,7 @@ sections:
       json.full_name
       => "John Smith"
 
-      #a name accessor dosn't exist
+      #a name accessor doesn't exist
       json.name
       => NoMethodError: undefined method `name' ...</code>
       </pre>
@@ -286,7 +284,7 @@ sections:
       <a name="default-values"></a>
 
       ##Default Values
-      How about providing a default value if one dosen't exist?
+      How about providing a default value if one doesn't exist?
 
       <pre>
       <code class="language-ruby">json_string = '{"name":"John Smith", "age":21}'
@@ -331,7 +329,7 @@ sections:
 
       json = Person.new(JSON.parse(json_string))
 
-      #first_name's value was actually parsed fron "name"
+      #first_name's value was actually parsed from "name"
       json.first_name
       => "John"
 
@@ -339,7 +337,7 @@ sections:
       json.last_name
       => "Smith"
 
-      #and finnaly full_name is the "name" value
+      #and finally full_name is the "name" value
       json.full_name
       => "John Smith"</code>
       </pre>
@@ -427,7 +425,7 @@ sections:
         #here we have all the power of naming, defaults, and procs
 
         #also I'll demonstrate the alternate way of defining accessors
-        #useing the plural form.
+        #using the plural form.
         json_value_accessors :email, :phone_number
       end
 
@@ -451,7 +449,7 @@ sections:
       => "555-555-5555"</code>
       </pre>
 
-      This is basically how nested objects work and they can be as deaply nested as practical. You simply apply the same approach. Create custom classes for each level of nested object and define the accessors appropriately.
+      This is basically how nested objects work and they can be as deeply nested as practical. You simply apply the same approach. Create custom classes for each level of nested object and define the accessors appropriately.
 
       <a name="arrays"></a>
 
