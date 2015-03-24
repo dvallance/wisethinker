@@ -37,12 +37,12 @@ module Wisethinker
     value_accessors :title
     value_accessor :body
     value_accessor :body, name: :rendered_body, proc: Proc.new {|json_object,value|
-      json_object.render json_object.json_parent.template_engine, value
+      json_object.render json_object.parent.template_engine, value
     }
   end
 
   class Update < Document
-    value_accessors :date,[:body, name: :rendered_body,  proc: Proc.new {|json_object,value| json_object.render json_object.json_parent.template_engine, value}]
+    value_accessors :date,[:body, name: :rendered_body,  proc: Proc.new {|json_object,value| json_object.render json_object.parent.template_engine, value}]
   end
 
   class Article < Document
