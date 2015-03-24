@@ -1,0 +1,20 @@
+---
+type: news
+url_name: json-object-gem-launched
+title: JsonObject Version 0.0.1 Released
+date: '2015-03-23'
+
+sections:
+  - title:
+    body: |
+
+      I just released my [JsonObject](/json-object/index) project to RubyGems.
+
+      During the process of building this site I decided to use a JSON backend to store all my *listings*. Therefore I wanted a better way to work with JSON then simply using JSON Hashes directly.  As a result I built JsonObject which can be used to quickly represent a JSON structure with custom classes/objects. I think it works really well and wanted to share it!
+
+      ...if you happen to try it out I would love to hear your opinions ;)
+
+
+
+
+
