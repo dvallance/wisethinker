@@ -1,0 +1,104 @@
+---
+type: json-object
+url_name: classes
+title: Creating a JsonObject Class
+date: '2015-03-17'
+code_examples: true
+
+sections:
+  - title:
+    body: |
+
+      [Back to the Index](/json-object/index)
+
+  - title: What is a JsonObject class?
+    body: |
+      JsonObject is actually a module, and when I refer to a "JsonObject class" I simply mean a class that has included this module. It adds some important methods to facilitate the storing of a JSON hash, and subsequently defining accessor methods to read the values.
+
+  - title: Ways to Create a JsonObject Class
+    body: |
+      To create a JsonObject class you can either include JsonObject directly or inherit from JsonObject::Base. They are functionally equivalent and it is just a matter of preference.
+
+      ...also I've made methods chainable to better support using the *Class.new* method, but you can define your classes with the standard *class* keyword if you prefer.
+
+      ##Lets Look at Some Examples
+
+      (The following are all functionally equivalent)
+
+      <pre>
+      <code class="language-ruby"># Using 'Class.new' and including JsonObject
+
+      #accessors are chainable
+      Contact = Class.new.include(JsonObject).value_accessors(:name, :email)</code>
+      </pre>
+
+      <pre>
+      <code class="language-ruby"># Using 'Class.new' and inheriting from JsonObject::Base
+
+      Contact = Class.new(JsonObject::Base).value_accessors(:name, :email)</code>
+      </pre>
+
+      <pre>
+      <code class="language-ruby"># Using 'class' keyword and including JsonObject
+
+      class Contact
+        include JsonObject
+
+        #define your accessors
+        value_accessors :name, :email
+      end</code>
+      </pre>
+
+      <pre>
+      <code class="language-ruby"># Using 'class' keyword and inheriting from JsonObject::Base
+
+      class Contact < JsonObject::Base
+
+        #define your accessors
+        value_accessors :name, :email
+      end</code>
+      </pre>
+
+  - title: Turn an Existing Class into a JsonObject Class
+    body: |
+      If your existing class doesn't require parameters to initialize you simply *include* or *inherit* as shown in the examples above. Just be mindful of possible naming conflicts.
+
+      *class level names*  [:create, :value_accessor, :value_accessors, :object_accessor]
+
+      *instance level names*  [:json_hash, :json_hash=, :parent, :parent=]
+
+      ##Existing Class Requires Parameters
+      In this case you must re-define the *create* method because the default one provided by JsonObject trys to call *new()* to create an instance of the class.
+
+      <pre>
+      <code class="language-ruby"># We have an existing Contact class
+
+      class Contact
+        attr_accessor :name
+        def initialize name
+          @name = name
+        end
+
+        # We have to override the create method at the class level.
+        # This method is responsible for creating an instance of our class
+        # and this object should set the #json_hash and optionally the
+        # #parent instance variables.
+        def self.create json, parent=nil
+
+          # Here we create our new instance getting our required parameter
+          # from the passed in json hash.
+          new(json["name").tap do |obj|
+            obj.json_hash = json
+            obj.parent = nil
+          end
+        end
+
+        # Then add any accessors
+        value_accessor :something
+      end</code>
+      </pre>
+
+  - title:
+    body: |
+
+      [Back to the Index](/json-object/index)

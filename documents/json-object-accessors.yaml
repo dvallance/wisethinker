@@ -1,0 +1,359 @@
+---
+type: json-object
+url_name: accessors
+title: Creating Value Accessor Methods
+date: '2015-03-17'
+code_examples: true
+
+sections:
+  - title:
+    body: |
+      [Back to the Index](/json-object/index)
+
+  - title: Types of Accessors
+    body: |
+      JSON is a collection of attributes and their values. The values can be of type Number, String, Boolean, null, Array and Object.
+
+      When you use JSON.parse/load on JSON you get a Hash with the attributes set as the keys and the values set as their Ruby equivalent type. The key(s) will be of type String and values will be as follows...
+
+      * Number becomes FixNum
+      * String becomes String
+      * Boolean becomes TrueClass/FalseClass
+      * null becomes NilClass
+      * Array becomes Array
+      * Object becomes Hash
+
+      JsonObject provides a *create* method that accepts a JSON Hash and then gives you two different ways to define accessors to retrieve the values.
+
+      * value_accessor - can be used for any value type mentioned above
+      * object_accessor - is specifically for handling value type Object
+
+      The two methods have the same parameter format and behave similarity. You supply an *attribute* parameter which is used as the *key* to fetch the JSON Hash's value. \#to\_s is called on the parameter before acting as the key, therefore a Symbol, String or any Object supporting \#to\_s can be passed in. The *attribute* parameter is also used as the default accessor method name. To create the method *define_method* is called with this *attribute\#to\_sym*.
+
+      ##Shared Option :name
+
+      The two accessor defining methods share a *name* option. This allows you to assign a specific name for the defined method as opposed to using the *attribute\#to\_sym*. This is important as define_method actually will create method names of any valid symbol.
+
+      I don't try to enforce any method naming conventions and simply allow *Object#define_method* to do its thing. Which is turning any symbol into a method, even if the symbol contains spaces or weird characters.
+
+      Example.
+
+      <pre>
+      <code class="language-ruby"># define_method can handle weird names.
+
+      # this JSON is valid
+      {"bad ^ method & name":"crazy"}
+
+      # this will work just fine and create a method that when called returns
+      # "crazy". Calling the method is just problematic.
+      value_accessor "bad ^ method & name"
+
+      # you can replicate this in irb by calling define_method directly.
+      define_method("bad ^ method & name") { 'wild!' }
+      => :"bad ^ method & name"
+
+      # we can see the method was created
+      methods.grep /bad/
+      => [:"bad ^ method & name"]
+
+      # trying to call it traditionally is futile
+      bad ^ method & name
+      NameError: undefined local variable or method `bad' for main:Object
+
+      # you can however call it like this, as the method was defined and is
+      # valid
+      send :"bad ^ method & name"
+      => "wild!"</code>
+      </pre>
+
+      If you have JSON with attribute names that do not map to good Ruby method names than you should always supply the *:name* option. Optionally you could make your own object to use as the *attribute* parameter, which has a *\#to\_s* for the hash key and a *\#to\_sym* for the defined method name.
+
+      It could look like this, and I may add something similar if people want this as a feature?
+
+      <pre>
+      <code class="language-ruby"># define_method can handle weird names.
+      class AccessorParam
+        def initalize attribute
+          @attribute = attribute
+        end
+
+        # this would be used as the key to get the JSON hash value
+        def to_s
+          @attribute.to_s
+        end
+
+        # this could modify the attribute to be a good method name
+        def to_sym
+          ... #custom code to turn create a 'good' symbol
+        end
+      end</code>
+      </pre>
+
+      ##Caching
+
+      All accessors defined for a JsonObject have built in caching. The first time an accessor is call the actual work is done to find the value, after which this value is cached and subsequent calls are simply returned from it.
+
+  - title: Lets Look at Using - value_accessor
+    body: |
+      In addition to *:name* there are two additional options for value_accessor.
+
+      * name - name\#to\_sym is used as the new method name (discussed above)
+      * default - if a key doesn't exist or its value is null return this default
+      * proc - provide one to manipulate the value and return the result (remember accessors are cached)
+
+      ##Here is an example that demonstrates all these options
+
+      <pre>
+      <code class="language-ruby"># we need to supply a JSON hash, here we are parsing a string
+      json = JSON.parse(<<-EOS
+        {
+          "type": null,
+          "full_name": "John Smith",
+          "age": 40,
+          "info":
+            {
+              "phone": "555-5555",
+              "email": "johnsmith@somewhere.com"
+            },
+          "nick_names":["Mr S", "Johnny Boy"]
+        }
+      EOS
+      )
+
+      # now we define our JsonObject
+      class Person
+        include JsonObject
+
+        # age seems perfect for the method name so we'll leave it as is
+        value_accessor :age
+
+        # we want a first_name method so need to parse the "full_name"
+        # we provide a proc object that has access to 'self' and the value
+        value_accessor :full_name, name: :first_name,
+          proc: Proc.new{|_self_, value| value.split(' ').first}
+
+        # similarity we create a last_name method
+        value_accessor :full_name, name: :last_name,
+          proc: Proc.new{|_self_, value| value.split(' ').last}
+
+        # lets say type is meant to be relationship type, so lets have the
+        # accessor method be named 'relation'
+        # ...also anytime the "type" attribute is missing or null (as in
+        # this example) we want to assign a default.
+        value_accessor :type, name: "relation", default: "acquaintance"
+
+        # info is a JSON type of Object which is simply a hash
+        value_accessor :info, name: "information"
+
+        # arrays are simply arrays so lets just grab nick_names as is
+        value_accessor :nick_names
+      end
+
+      # now we use our new JsonObject class
+      person = Person.create(json)
+
+      # and we test out all our accessor methods
+      person.age
+      => 40
+
+      person.first_name
+      => "John"
+
+      person.last_name
+      => "Smith"
+
+      person.relation
+      => "acquaintance"
+
+      person.information
+      => {"phone"=>"555-5555", "email"=>"johnsmith@somewhere.com"}
+
+      person.nick_names
+      => ["Mr S", "Johnny Boy"]
+
+      Person.instance_methods false
+      => [:age, :first_name, :last_name, :relation, :information]</code>
+      </pre>
+
+      ## The Convenience Method - json_accessors
+      As a convenience to allow multiple value accessor definitions with one call you can use the pluralized form.
+
+      <pre>
+      <code class="language-ruby"># here is "age", "type", "info" and "nick_names" from above
+      # defined on one line.
+
+      value_accessors [:type, name: "relation", default: "acquaintance"],
+        [:info, name: "information"], :nick_names, :age
+
+      # its really useful if you have a lot of accessors that dont need
+      # any options, but as you can see they can be supplied in an array.</code>
+      </pre>
+
+      json_accessors (pluralized) allows defining muiltible value accessors with one call
+
+  - title: Lets Look at Using - object_accessor
+    body: |
+
+      JSON with a value type of Object can be handled as a Hash using *value_accessor* but when you want it to be a specific type of object, *object_accessor* is available.
+
+      In addition to *:name* there are a couple additional options for object_accessor.
+
+      * name - name\#to\_sym is used as the new method name (discussed above)
+      * class - allows you to assign a JsonObject class (by default JsonOpenStruct is used)
+      * set_parent - by default every nested JsonObject stores a reference to its parent, if you want an anonymous class to be garbage collected you will want to make sure to set this to *false*
+
+      ##Here are some Examples
+
+      <pre>
+      <code class="language-ruby"># Heres a simple color object
+      json = JSON.parse(<<-EOS
+        {
+            "color": {
+                "name": "red",
+                "hex_code": "ff4040"
+            }
+        }
+      EOS
+      )
+
+      # Lets create a JsonObject class to represent a color.
+      Color = JsonObject.create.value_accessors(:name, :hex_code)
+
+      # If we cared about the containing JsonObject we could define one and
+      # provide it with an object_accessor and our Color class
+      ContainingClass = JsonObject.create.object_accessor(:color,
+        class: Color)
+
+      # Here we create our actual object instance supplying the JSON Hash
+      containing_class = ContainingClass.create(json)
+
+      # ...and we can get at our object because of object_accessor
+      containing_class.color.class
+      => Color
+
+      # ...and of course Color works
+      containing_class.color.name
+      => "red"
+
+      containing_class.color.hex_code
+      => "ff4040"
+
+      # Sometimes we don't care about the containing class so an anonymous
+      # class can be used to simply load the class we want.
+      # Remember to set_parent: false or else the Color object will store a
+      # reference to parent, in this case the anonymous class, and it won't
+      # be garbage collected
+      color = JsonObject.create.object_accessor(:color,
+        class: Color).create(json).color
+
+      color.name
+      => "red"
+
+      color.hex_code
+      => "ff4040"
+
+      # ...and of course you could just give the proper JSON directly to the
+      # Color#create method
+
+      color = Color.create(json["color"])</code>
+      </pre>
+
+      ##Object Arrays are Handle Seamlessly
+
+      <pre>
+      <code class="language-ruby"># This time we have an array of color Objects
+      json = JSON.parse(<<-EOS
+        {
+            "colors": [
+                {
+                    "name": "red",
+                    "hex_code": "ff4040"
+                },
+                {
+                    "name": "blue",
+                    "hex_code": "3b5998"
+                }
+            ]
+        }
+      EOS
+      )
+
+      # With arrays the use of an anonymous class becomes more useful
+      colors = JsonObject.create.object_accessor(:colors, class: Color,
+          set_parent: false).create(json).colors
+
+      # ...and we can work with our Array of Colors
+      colors.first.name
+      => "red"
+
+      colors.last.name
+      => "blue"</code>
+      </pre>
+
+      Nesting JsonObjects is how you build up an object based representation of JSON, and it is quite powerful once you start piecing these abilities together.
+
+      ## What About an Array of Mixed Values?
+
+      JsonObject is best used when you know what the JSON looks like and it is consistent, but I thought I would show an example of combining some of the features to handle a situation like this.
+
+      <pre>
+      <code class="language-ruby"># Here we have an array with 1 String and 1 Object
+      json = JSON.parse(<<-EOS
+        {
+            "colors": [
+                "red#ff4040",
+                {
+                    "name": "blue",
+                    "hex_code": "3b5998"
+                }
+            ]
+        }
+      EOS
+      )
+
+      # The responsibility of creating a Color object is with the
+      # .create method which we override to understand how to
+      # initialize with a String
+      class Color
+        include JsonObject
+
+        value_accessors(:name, :hex_code)
+
+        # We need our class to handle a String as well as a Hash
+        def self.create(json, parent=nil)
+
+          # Here we create a new hash from the string
+          if json.instance_of? String
+            array = json.split('#')
+            json = Hash["name", array.first, "hex_code", array.last]
+          end
+
+          # simply use the default initialize method from here
+          super(json, parent)
+
+          # This is what super's code actually looks like
+          # new().tap do |obj|
+          #   obj.json_hash = json
+          #   obj.parent = nil
+          # end
+        end
+      end
+
+      # Since colors is an array, each item is passed to our class: Color
+      # and we have coded that to handle a possible string.
+      colors = JsonObject.create.object_accessor(:colors, class: Color)
+        .create(json).colors
+
+      # ...and it all works
+      colors.first.name
+      => "red"
+
+      colors.last.name
+      => "blue"</code>
+      </pre>
+
+      With control of JsonObject creation, and being able to pass in Proc(s) to accessors; along with the other options, you can find very interesting ways to code solutions. I'm finding JsonObject is a lot more powerful then I originally planned for and I hope you do as well.
+
+  - title:
+    body: |
+      [Back to the Index](/json-object/index)
