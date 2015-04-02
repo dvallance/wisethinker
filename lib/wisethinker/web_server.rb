@@ -16,7 +16,7 @@ module Wisethinker
     helpers Wisethinker::Helpers
 
     get '/' do
-      redirect '/listings'
+      redirect '/listings', 303
     end
 
     get '/listings/?' do
