@@ -1,0 +1,97 @@
+---
+type: article
+url_name: benchmarking-rack-web-servers
+title: Benchmarking Rack Web Servers (Default Configurations)
+date: '2015-04-03'
+code_examples: true
+
+sections:
+  - title:
+    body: |
+      I decided to perform some HTTP benchmarking tests to see how my new site runs on various web servers. Also in addition to testing the different servers, I tried running the code using two different JSON back-ends.
+
+  - title: What is being Tested?
+    body: |
+      I will test this site, for which the code can be found here [www.wisethinker.info](https://github.com/dvallance/wisethinker).
+
+      It is a [Sinatra](http://www.sinatrarb.com/) based Ruby application, which stores all content in a JSON based back-end. The code supports using either RethinkDB or MongoDB, so these will both be tested.
+
+      ##Rack Web Servers
+      [Thin](http://code.macournoyer.com/thin/), [Passenger](https://www.phusionpassenger.com/), [Puma](http://puma.io/), [Unicorn](http://unicorn.bogomips.org/)
+
+      ##MongoDB
+
+      - docker: [mongo:latest](https://registry.hub.docker.com/_/mongo/)
+      - gem: mongo(1.11.1)
+      - gem: bson_ext(1.11.1)
+
+      ##RethinkDB
+
+      - docker: [rethinkdb](https://registry.hub.docker.com/_/rethinkdb/)
+      - gem: rethinkdb(1.16.0.0)
+
+  - title: Tested How?
+    body: |
+      Using [Jmeter](http://jmeter.apache.org/) I will simulate 50 users each hitting 3 different pages 100 times each, for a total of 15000 HTTP requests against each server.
+
+      ##The 3 Pages Requested
+
+      - [/listings](/listings)
+      - [/article/installing-an-operating-system-on-a-zotac-nano-ad10](/article/installing-an-operating-system-on-a-zotac-nano-ad10)
+      - [/json-object/accessors](/json-object/accessors)
+
+      Each server will be tested using both MongoDB and RethinkDB as the back-end.
+
+      ##System
+
+      I will be using my System76 laptop running Ubuntu-Gnome.
+
+      Intel(R) Core(TM) i7-4750HQ CPU @ 2.00GHz with 8Gigs DDR3 RAM
+
+      (MRI) ruby 2.1.2p95 (2014-05-08) [x86_64-linux-gnu]
+
+  - title: Results
+    body: |
+
+      The *fastest time was 31ms* on Passenger (with MongoDB), and the *slowest time was 301ms* on Unicorn (with RethinkDB). ...also only 1 combination had *errors*, which was Puma (with RethinkDB).
+
+      Detailed results follow...
+
+      ##Thin (with MongoDB)
+      ![WiseThinker](/images/wisethinker_thin_mongo.png)
+
+      ##Thin (with RethinkDB)
+      ![WiseThinker](/images/wisethinker_thin_rethink.png)
+
+      ##Passenger (with MongoDB)
+      ![WiseThinker](/images/wisethinker_passenger_mongo.png)
+
+      ##Passenger (with RethinkDB)
+      ![WiseThinker](/images/wisethinker_passenger_rethink.png)
+
+      ##Puma (with MongoDB)
+      ![WiseThinker](/images/wisethinker_puma_mongo.png)
+
+      ##Puma (with RethinkDB)
+      ![WiseThinker](/images/wisethinker_puma_rethink.png)
+
+      ##Unicorn (with MongoDB)
+      ![WiseThinker](/images/wisethinker_unicorn_mongo.png)
+
+      ##Unicorn (with RethinkDB)
+      ![WiseThinker](/images/wisethinker_unicorn_rethink.png)
+
+
+  - title: Conclusions?
+    body: |
+      This is a pretty simple comparison and actually doesn't tell me very much. It simply gives me an idea of which web server, with zero configuration mind you, runs my site well.
+
+      Also as far as the back-ends go, I can see that MongoDB performs significantly faster, but the difference in speed is probably implementation specific (don't rule out RethinkDB because of it).
+
+      There also was an issue with Puma and RethinkDB (look at the *Error %*). It turns out there are connection issues that crop up, so this would be something to look at, in more detail, if I was determined to use Puma and RethinkDB together.
+
+  - title: Important Differences
+    body: |
+      There are big differences in the architecture of these web servers and even thought Thin appears to lag behind the others in terms of speed, it is an event based/non-blocking server. Therefore any code I have that is blocking, will cause the whole event loop to stop and slow things down, so if I was an expert at non-blocking code Thin might be a beast!
+
+      ...also there are a ton of things to consider when choosing a server (configuration details, master processes, worker processes, thread safety concerns, memory management, documentation coverage, Ruby interpreter support, etc). Currently I haven't found a good resource to highlight all these differences (if there is one). If/when I investigate further I will be sure to share my findings.
